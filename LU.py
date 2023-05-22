@@ -24,8 +24,12 @@ for r in range(0,m):
         matriz [r,c]=float(matriz[r,c])
         u[r,c]=matriz[r,c]
 
+print("usted ingreso la siguiente matriz: ")
+print(u)
+
 
 #u = [[ 2, -1,  1.],[ 3,  3,  9.],[ 3,  3,  5]]
+
 time.sleep(1)
 
 #operacion para poner ceros debajo de la diagonal
@@ -56,6 +60,8 @@ for r in range (0,m):
     for c in range(0,m):
         for k in range (0,m):
             matrizr[r,c] +=(l[r,k]*u[k,c])
+
+print("comprobacion")            
 print(matrizr)
 a=np.dot(l,u)
 print("\n---------------------------------------------")
