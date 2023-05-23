@@ -23,42 +23,43 @@ for r in range(0,m):
         matriz [r,c]=(input("elemento a["+str(r+1)+","+str(c+1)+"]: "))
         matriz [r,c]=float(matriz[r,c])
         u[r,c]=matriz[r,c]
-
+print("\n---------------------------------------------")
 print("usted ingreso la siguiente matriz: ")
 print(u)
-
 
 #u = [[ 2, -1,  1.],[ 3,  3,  9.],[ 3,  3,  5]]
 
 time.sleep(1)
 
 #operacion para poner ceros debajo de la diagonal
-contadorMatrizU=0
-contadorMatrizL=0
+
+# k es fila/renglon r es columna
 for k in range(0,m):
-    for r in range(0,m):
-        print("\nEstamos en la fila",r+1,"columna",k+1,"con valor ",matriz[r,k])
-        contadorMatrizL =contadorMatrizL+1
-        if(k==r):
-            l[k,r]=1
+    for j in range(0,m):
+        print("\nEstamos en la fila",j+1,"columna",k+1,"con valor ",matriz[j,k])
+        
+        if(k==j):
+            l[k,j]=1
             print("\nponemos un 1 en esta posicion" )
             print("asi va quedando la funcion l")
             print(l)
-        if (k<r):
-            print("\ndividiremos", matriz[r,k],"por la posicion",k+1,k+1,"con valor", matriz[k,k] )
-            factor=(matriz[r,k]/matriz[k,k])
+        if(k>j):
+            print("dejamos este valor")    
+        if (k<j):
+            print("\ndividiremos", matriz[j,k],"por la posicion",k+1,k+1,"con valor", matriz[k,k] )
+            factor=(matriz[j,k]/matriz[k,k])
             print("nos da como resultado de factor",factor)
-            l[r,k]=factor
+            l[j,k]=factor
             print("asi va quedando la matriz l")
             print(l)
             
-            for c in range(0,m):
-                contadorMatrizU =contadorMatrizU+1
-                print("\nEstamos en la fila",r+1,"columna",c+1, "con valor ",matriz[r,c])
-                print("calculamos ",matriz[r,c]," menos (",factor,"por",matriz[k,c],")")
-                matriz[r,c]=matriz[r,c]-(factor*matriz[k,c])
-                print("nos da como resultado",matriz[r,c])
-                u[r,c]=matriz[r,c]
+            for c in range(0,m): #aca j se convierte en fila/renglon y c se usa como columna
+                
+                print("\nEstamos en la fila",j+1,"columna",c+1, "con valor ",matriz[j,c])
+                print("calculamos ",matriz[j,c]," menos (",factor,"por",matriz[k,c],")")
+                matriz[j,c]=matriz[j,c]-(factor*matriz[k,c])
+                print("nos da como resultado",matriz[j,c])
+                u[j,c]=matriz[j,c]
                 print("asi va quedando la matriz U ")
                 print(u)
                 
@@ -68,7 +69,6 @@ print("resultados")
 print("matriz l")
 print(l)
 
-print("en total se necesitarion ",contadorMatrizL,"operaciones elementales para despejar L")
 print("\n---------------------------------------------")
 print("resultados")
 print("matriz u")
