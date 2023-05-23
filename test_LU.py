@@ -15,6 +15,7 @@ matriz= np.zeros([m,m]) # defino la matriz
 
 u=np.zeros([m,m])
 l=np.zeros([m,m])
+b=np.zeros([m])
 
 print("ingrese los elementos de la matriz")
 # r es fila/renglon c es columna
@@ -23,9 +24,25 @@ for r in range(0,m):
         matriz [r,c]=(input("elemento a["+str(r+1)+","+str(c+1)+"]: "))
         matriz [r,c]=float(matriz[r,c])
         u[r,c]=matriz[r,c]
-print("\n---------------------------------------------")
+
+
 print("usted ingreso la siguiente matriz: ")
 print(u)
+time.sleep(1)
+
+print("\n---------------------------------------------")
+print("Ahora ingrese el vector b = (b1, b2, b3)")
+for r in range(0,m):
+    b[r] = input("ingrese el valor de b" + str(r + 1) + ": ") 
+
+print("usted ingreso el siguiente vector b: ")
+print(b)
+time.sleep(1)
+
+print("\nPor lo tanto su sistema Ax = b quedo de la siguiente manera:")
+for i in range(m):
+    print(str(matriz[i,0]) + "x + " + str(matriz[i,1]) + "y + " + str(matriz[i,2]) + "z = " + str(b[i]))
+time.sleep(1)
 
 #u = [[ 2, -1,  1.],[ 3,  3,  9.],[ 3,  3,  5]]
 
@@ -64,7 +81,7 @@ for k in range(0,m):
                 print(u)
                 
 
-                
+print("\n---------------------------------------------")               
 print("resultados")
 print("matriz l")
 print(l)
