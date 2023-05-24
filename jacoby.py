@@ -11,6 +11,16 @@ La siguiente función en Python recibe la matriz de coeficientes  a  y el vector
 Adicionalmente recibe un vector inicial  x, la estimación del error   e y el máximo de iteraciones permitidas m. Esta 
 función utiliza dentro de un ciclo, la función jacobi definida anteriormente. Entrega el vector x calculado y el número 
 de iteraciones realizadas k. Si el método no converge, x contendrá un vector nulo.
+
+"a" es la matriz de coeficientes que recibe
+"b" es el vector de constantes de un sistema lienal
+"x" es el vector inicial
+"e" es la estimacion del error
+"m" es el maximo de iteracion permitidas
+"k" es el numero de interaciones realizadas
+"jacobi" entrega el vector "x" ya calculado y "k" las iteraciones
+
+si el metodo converge "x" sera nulo 
 '''
 
 def jacobi(a,b,x): 
@@ -45,15 +55,22 @@ A = np.array([[10,-1,2,0],
 			[2,-1,10,-1],
 			[0,3,-1,8]],float)
 """
-A = np.array([[10,2,0],
-			[-1,-1,3],
-			[2,10,-1],
+#basndome en este video https://www.youtube.com/watch?v=Q6BdR45uo7I&t=670s
+
+A = np.array([[3,-1,-1],
+			[-1,3,1],
+			[2,1,4],
 ],float)
+
+
 # Vector Solución
-b = np.array([[6],[25],[-11],[15]],float)
+#b = np.array([[6],[25],[-11],[15]],float)
+
+b = np.array([[1],[3],[7],],float)
 
 # Vector de Inicio
-x=np.array([[0],[0],[0],[0]],float)
+#x=np.array([[0],[0],[0]],float)
+x=np.array([[0],[0],[0]],float)
 
 # Numéro de iteraciones
 maxite=1000
