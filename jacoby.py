@@ -23,33 +23,33 @@ m=3
 matriz= np.zeros([m,m]) # defino la matriz
 A = np.zeros([m,m]) # defino la matriz
 b = np.array([[0],[0],[0]],float) # defino el vector
+x = np.array([[0],[0],[0]],float) # Vector de Inicio
+
+# Numéro de iteraciones maximo antes de arrojar error
+maxite=1000
 
 # Matriz de 3x3 para hacer pruebas
-#A = np.array([[3,-1,-1],[-1,3,1],[2,1,4],],float)
+A = np.array([[3,-1,-1],[-1,3,1],[2,1,4],],float)
 
 #aqui se ingresan los valores de la matriz
+"""
 print("Porfavor ingrese los elementos de la matriz a trabajar con Jacobi\n")
 for r in range(0,m):
     for c in range(0,m):
         matriz [r,c]=(input("elemento a["+str(r+1)+","+str(c+1)+"]: "))
         matriz [r,c]=float(matriz[r,c])
         A[r,c]=matriz[r,c]
-
+"""
 # Vector Solución para hacer pruebas 
-# b = np.array([[1],[3],[7],],float)
+b = np.array([[1],[3],[7],],float)
 
 #aqui se ingresan los valores del vector
+"""
 print("Porfavor ingrese los elementos del vector\n")
 for r in range(0,m):
     b [r]=(input("elemento a["+str(r+1)+"]: "))
+"""
 
-
-        
-# Vector de Inicio
-x = np.array([[0],[0],[0]],float)
-
-# Numéro de iteraciones maximo antes de arrojar error
-maxite=1000
 
 def jacobi(a,b,x): 
 	n=len(x) 
@@ -57,7 +57,11 @@ def jacobi(a,b,x):
 	for  i  in  range(n): 
 		s=0
 		for j in range(n): 
+			print("\nEstamos en la fila",i+1,"columna",j+1,"con valor ",A[i,j])
+			if i==j:
+				print("no hago nada")
 			if i!=j:
+				print("ahora hago el calculo de matriz a en posicion ")
 				s=s+a[i,j]*t[j]
 				x[i]=(b[i]-s)/a[i,i]
 	return x
@@ -68,7 +72,7 @@ def jacobim(a,b,x,e,m):
 	for  k  in  range(m): 
 		x=jacobi(a,b,x)
 		d=np.linalg.norm(np.array(x)-np.array(t),np.inf)
-		print ("Para la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(7)))+"\tError: "+str(abs(d)))
+		print ("Para la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(2)))+"\tError: "+str(abs(d)))
 		if d<e:
 			return [x,k] 
 		else:
