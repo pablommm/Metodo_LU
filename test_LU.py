@@ -46,6 +46,8 @@ time.sleep(1)
 
 #u = [[ 2, -1,  1.],[ 3,  3,  9.],[ 3,  3,  5]]
 
+
+
 time.sleep(1)
 
 #operacion para poner ceros debajo de la diagonal
@@ -84,15 +86,73 @@ for k in range(0,m):
 print("\n---------------------------------------------")               
 print("resultados")
 print("matriz l")
+l = np.around(l, 3)
 print(l)
 
 print("\n---------------------------------------------")
 print("resultados")
 print("matriz u")
+u = np.around(u, 3)
 print(u)
 
 
+#Ly = b
 print("\n---------------------------------------------")
+print("Ahora vamos a calcular Ly = b")
+for i in range(m):
+    print(str(l[i,0]) + "x + " + str(l[i,1]) + "y + " + str(l[i,2]) + "z = " + str(b[i]))
+time.sleep(1)
+
+y = np.zeros([m])
+y[0] = b[0] /l[0,0]
+y[1] = ( b[1] - ( l[1,0] * y[0] ) ) / l[1,1]
+y[2] = ( b[2] - (l[2,0] * y[0]) - (l[2,1] * y[1]) ) / l[2,2]
+
+y = np.around(y, 3)
+print("\nEl valor de y(1) es: " + str(y[0]))
+time.sleep(1)
+print("El valor de y(2) es: " + str(y[1]))
+time.sleep(1)
+print("El valor de y(3) es: " + str(y[2]))
+time.sleep(1)
+
+print("\nEl vector y que es solucion del sistema Ly = b es: ")
+print(str(y))
+time.sleep(2)
+
+
+#Ux = y
+print("\n---------------------------------------------")
+print("Ahora vamos a calcular Ux = y")
+for i in range(m):
+    print(str(u[i,0]) + "x + " + str(u[i,1]) + "y + " + str(u[i,2]) + "z = " + str(b[i]))
+time.sleep(1)
+
+if(u[0,0] == 0 or u[1,1] == 0 or u[2,2] == 0):
+    print("\nEste sistema no tiene un vector x que lo solucione " + 
+          "debido a que un elemento de la diagonal de la matriz U es igual a 0")
+else:
+    x = np.zeros([m])
+    x[2] = y[2] / l[2,2]
+    x[1] = ( y[1] - ( u[1,2] * x[2] ) ) / u[1,1]
+    x[0] = ( y[0] - (u[0,2] * x[2]) - (u[0,1] * x[1]) ) / u[0,0]
+
+    x = np.around(x, 3)
+    print("\nEl valor de x(1) es: " + str(x[0]))
+    time.sleep(1)
+    print("El valor de x(2) es: " + str(x[1]))
+    time.sleep(1)
+    print("El valor de x(3) es: " + str(x[2]))
+    time.sleep(1)
+
+    print("\nEl vector y que es solucion del sistema Ux = y es: ")
+    print(str(x))
+    print("\nA su vez este vector tambien soluciona el sistema Ax = b")
+    time.sleep(2)
+
+
+
+    print("\n---------------------------------------------")
 """
 #comprobacion
 matrizr=np.zeros([m,m])
