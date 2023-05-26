@@ -57,11 +57,11 @@ def jacobi(a,b,x):
 	for  i  in  range(n): 
 		s=0
 		for j in range(n): 
-			print("\nEstamos en la fila",i+1,"columna",j+1,"con valor ",A[i,j])
-			if i==j:
-				print("no hago nada")
+			#print("\nEstamos en la fila",i+1,"columna",j+1,"con valor ",A[i,j])
+			#if i==j:
+				#print("no hago nada")
 			if i!=j:
-				print("ahora hago el calculo de matriz a en posicion ")
+				#print("ahora hago el calculo de matriz a en posicion ")
 				s=s+a[i,j]*t[j]
 				x[i]=(b[i]-s)/a[i,i]
 	return x
@@ -71,7 +71,7 @@ def jacobim(a,b,x,e,m):
 	t=x.copy()
 	for  k  in  range(m): 
 		x=jacobi(a,b,x)
-		d=np.linalg.norm(np.array(x)-np.array(t),np.inf)
+		d=np.linalg.norm(np.array(x)-np.array(t),np.inf) # este es el calculo del margen de error
 		print ("Para la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(2)))+"\tError: "+str(abs(d)))
 		if d<e:
 			return [x,k] 
