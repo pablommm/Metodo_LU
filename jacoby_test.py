@@ -21,7 +21,11 @@ si el metodo converge "x" sera nulo
 '''
 m=3
 matriz= np.zeros([m,m]) # defino la matriz
-A = np.zeros([m,m]) # defino la matriz
+A = np.zeros([m,m]) # defino la matriz original
+D = np.zeros([m,m]) # defino la matriz diagonal
+D_inversa= np.zeros([m,m]) # defino la matriz diagonal inversa
+L = np.zeros([m,m]) # defino la matriz inferior
+U = np.zeros([m,m]) # defino la matriz superior
 b = np.array([[0],[0],[0]],float) # defino el vector
 x = np.array([[0],[0],[0]],float) # Vector de Inicio
 
@@ -50,9 +54,67 @@ for r in range(0,m):
     b [r]=(input("elemento a["+str(r+1)+"]: "))
 """
 
+#--------------------------------------------------------------------------------
+print("Ingreso la matriz")
+print(A)
+
+for  r  in  range(m):
+    for  c  in  range(m):
+        if (r==c):
+            
+            D[r,c] = A[r,c]
+            #print("vamos formando la matriz diagonal")
+            #print(D)
+        if(r<c):
+            
+            U[r,c] = A[r,c]
+            #print("vamos armando la matriz superior")
+            #print(U)
+        if(r>c):
+            
+            L[r,c] = A[r,c]
+            #print("vamos armando la matriz inferior")
+            #print(L)
+            
+
+print("asi quedo la diagonal")
+print(D)
+print("asi quedo la inferior")
+print(L)
+print("asi quedo la superior")
+print(U)
+            
+print("Calculamos la inversa de la diagonal")
+for  r  in  range(m):
+    for  c  in  range(m):
+        if (r==c):
+            D_inversa[r,c]=np.around((1/A[r,c]),2)
+            
+print(D_inversa)
+suma_matriz= np.zeros([m,m])
+print("test suma de matriz")
+for  r  in  range(m):
+    for  c  in  range(m):
+        suma_matriz[r,c]=L[r,c]+ U[r,c]
+        
+print(suma_matriz)
+
+print("test multiplicacion de matriz")
+result = np.dot(D_inversa,suma_matriz)
+print(result)
+        
+
+
+
+
+
+
+
+
+"""
 def jacobi(a,b,x): 
-	n=len(x) # el largo del vector
-	t=x.copy() # copia del vector solucion
+	n=len(x) 
+	t=x.copy()
 	for  i  in  range(n): 
 		s=0
 		for j in range(n): 
@@ -96,3 +158,5 @@ else:
 	print(x)
 
 	print("\nEl numero de iteraciones es: "+str(k+1))
+ 
+ """
