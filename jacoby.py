@@ -20,10 +20,10 @@ de iteraciones realizadas k. Si el método no converge, x contendrá un vector n
 si el metodo converge "x" sera nulo 
 '''
 m=3
-matriz= np.zeros([m,m]) # defino la matriz
-A = np.zeros([m,m]) # defino la matriz
-b = np.array([[0],[0],[0]],float) # defino el vector
-x = np.array([[0],[0],[0]],float) # Vector de Inicio
+
+A = np.zeros([m,m]) # defino la matriz A
+b = np.array([[0],[0],[0]],float) # defino el vector b 
+x = np.array([[0],[0],[0]],float) # defino el vector de Inicio
 
 # Numéro de iteraciones maximo antes de arrojar error
 maxite=1000
@@ -56,13 +56,11 @@ def jacobi(a,b,x):
 	for  i  in  range(n): 
 		s=0
 		for j in range(n): 
-			#print("\nEstamos en la fila",i+1,"columna",j+1,"con valor ",A[i,j])
-			#if i==j:
-				#print("no hago nada")
-			if i!=j:
-				#print("ahora hago el calculo de matriz a en posicion ")
+			
+			if i!=j:				
 				s=s+a[i,j]*t[j]
 				x[i]=(b[i]-s)/a[i,i]
+				
 	return x
 
 def jacobim(a,b,x,e,m): 
@@ -70,8 +68,9 @@ def jacobim(a,b,x,e,m):
 	t=x.copy()
 	for  k  in  range(m): 
 		x=jacobi(a,b,x)
+		#print("\nEste es el valor de x ",x,"en la iteracion", k,"\n")
 		d=np.linalg.norm(np.array(x)-np.array(t),np.inf) # este es el calculo del margen de error
-		print ("Para la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(2)))+"\tError: "+str(abs(d)))
+		print ("\nPara la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(2)))+"\tError: "+str(abs(d)))
 		if d<e:
 			return [x,k] 
 		else:
