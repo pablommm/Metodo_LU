@@ -31,12 +31,12 @@ x = np.array([[0],[0],[0]],float) # Vector de Inicio
 
 # Numéro de iteraciones maximo antes de arrojar error
 maxite=1000
-"""
+
 # Matriz de 3x3 para hacer pruebas
 A = np.array([[3,-1,-1],[-1,3,1],[2,1,4],],float)
-"""
-#aqui se ingresan los valores de la matriz
 
+#aqui se ingresan los valores de la matriz
+"""
 print("Porfavor ingrese los elementos de la matriz a trabajar con Jacobi\n")
 for r in range(0,m):
     for c in range(0,m):
@@ -46,17 +46,20 @@ for r in range(0,m):
 """
 # Vector Solución para hacer pruebas 
 b = np.array([[1],[3],[7],],float)
-"""
-#aqui se ingresan los valores del vector
 
+#aqui se ingresan los valores del vector
+"""
 print("Porfavor ingrese los elementos del vector\n")
 for r in range(0,m):
     b [r]=(input("elemento a["+str(r+1)+"]: "))
-
+"""
 
 #--------------------------------------------------------------------------------
-print("Ingreso la matriz")
+print("\nUsted ingreso la matriz A")
 print(A)
+
+print("\nUsted ingreso el vector b")
+print(b)
 
 for  r  in  range(m):
     for  c  in  range(m):
@@ -77,14 +80,14 @@ for  r  in  range(m):
             #print(L)
             
 
-print("asi quedo la diagonal")
+print("\nAsi quedo la diagonal D")
 print(D)
-print("asi quedo la inferior")
+print("\nAsi quedo la inferior L")
 print(L)
-print("asi quedo la superior")
+print("\nAsi quedo la superior U")
 print(U)
             
-print("Calculamos la inversa de la diagonal")
+print("\nCalculamos la inversa de la diagonal")
 for  r  in  range(m):
     for  c  in  range(m):
         if (r==c):
@@ -92,18 +95,18 @@ for  r  in  range(m):
             
 print(D_inversa)
 suma_matriz= np.zeros([m,m])
-print("Suma de matriz U + L")
+print("\nSuma de matriz U + L")
 for  r  in  range(m):
     for  c  in  range(m):
         suma_matriz[r,c]=L[r,c]+ U[r,c]
         
 print(suma_matriz)
 
-print("la diagonal inversa multiplicada con la suma de L+U nos da: ")
+print("\nLa diagonal inversa multiplicada con la suma de L+U nos da: ")
 result = np.dot(D_inversa,suma_matriz)
 print(result)
 
-print("la diagonal inversa multiplicada con el vector b nos da: ")
+print("\nLa diagonal inversa multiplicada con el vector b nos da: ")
 result = np.dot(D_inversa,b)
 print(result)
 
@@ -147,6 +150,6 @@ else:
 
 	print("\nEl numero de iteraciones es: "+str(k+1))
  
-print("el valor de x es:", x[0])
-print("el valor de y es:", x[1])
-print("el valor de z es:", x[2])
+print("\nEl valor de x es:", x[0])
+print("\nEl valor de y es:", x[1])
+print("\nEl valor de z es:", x[2],"\n")
