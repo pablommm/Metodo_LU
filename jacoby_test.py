@@ -106,9 +106,15 @@ print("\nLa diagonal inversa multiplicada con la suma de L+U nos da: ")
 result = np.dot(D_inversa,suma_matriz)
 print(result)
 
+print("\nsi hice esto bien deberi darme ")
+result = np.dot(result,x)
+print(result)
+
 print("\nLa diagonal inversa multiplicada con el vector b nos da: ")
 result = np.dot(D_inversa,b)
 print(result)
+
+
 
 
 
