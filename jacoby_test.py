@@ -5,7 +5,7 @@ print('MÉTODO DE JACOBI',end="\n\n")
 
 '''
 La siguiente función en Python recibe la matriz de coeficientes  a  y el vector de constantes b  de un sistema lineal.
-Adicionalmente recibe un vector inicial  x, la estimación del error   e y el máximo de iteraciones permitidas m. Esta 
+Adicionalmente recibe un vector inicial  x, la estimación del error "e" y el máximo de iteraciones permitidas m. Esta 
 función utiliza dentro de un ciclo, la función jacobi definida anteriormente. Entrega el vector x calculado y el número 
 de iteraciones realizadas k. Si el método no converge, x contendrá un vector nulo.
 
@@ -26,7 +26,7 @@ D = np.zeros([m,m]) # defino la matriz diagonal
 D_inversa= np.zeros([m,m]) # defino la matriz diagonal inversa
 L = np.zeros([m,m]) # defino la matriz inferior
 U = np.zeros([m,m]) # defino la matriz superior
-b = np.array([[0],[0],[0]],float) # defino el vector
+b = np.array([[0],[0],[0]],float) # defino el vector solucion
 x = np.array([[0],[0],[0]],float) # Vector de Inicio
 
 # Numéro de iteraciones maximo antes de arrojar error
@@ -110,7 +110,9 @@ print("\nLa diagonal inversa multiplicada con el vector b nos da: ")
 result = np.dot(D_inversa,b)
 print(result)
 
-        
+
+
+"""
 print("\n aqui comienzan las iteraciones")
 
 def jacobi(a,b,x): 
@@ -119,9 +121,18 @@ def jacobi(a,b,x):
 	for  i  in  range(n): 
 		s=0
 		for j in range(n): 			
-			if i!=j:				
+			if i!=j:
+				
+				print("\nen la matriz fila",i+1,"en al columna",j+1,"tiene el valor",a[i,j])
+				print("esta siendo multiplicado la columna",j+1,"del vector valiendo",t[j])
 				s=s+a[i,j]*t[j]
+				print("da como resultado de s es",s)
+				print("")
+				print("al vector b, en posicion",i+1,"con valor",b[i])
+				print("le restamos el valor s",s+1)
+				print("esto lo dividimos por la diagonal de la matriz en la posicion",i+1,i+1, "siendo",a[i,i])
 				x[i]=(b[i]-s)/a[i,i]
+				print("\nnos da como resultado",x[i])
 	return x
 
 def jacobim(a,b,x,e,m): 
@@ -130,7 +141,7 @@ def jacobim(a,b,x,e,m):
 	for  k  in  range(m): 
 		x=jacobi(a,b,x)
 		d=np.linalg.norm(np.array(x)-np.array(t),np.inf) # este es el calculo del margen de error
-		print ("Para la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(2)))+"\tError: "+str(abs(d)))
+		print ("\nPara la iteración "+str(k+1)+": X = "+str(np.transpose(x.round(2)))+"\tError: "+str(abs(d)))
 		if d<e:
 			return [x,k] 
 		else:
@@ -139,7 +150,7 @@ def jacobim(a,b,x,e,m):
 
 
 # X es la solución y k las iteraciones
-[x,k]=jacobim(A,b,x,1.e-14,maxite)
+[x,k]=jacobim(A,b,x,1.e-1,maxite)
 
 if(k==maxite):
 	print("\nEl método diverge o no converge para la cota de error pedido")
@@ -153,3 +164,5 @@ else:
 print("\nEl valor de x es:", x[0])
 print("\nEl valor de y es:", x[1])
 print("\nEl valor de z es:", x[2],"\n")
+
+"""
