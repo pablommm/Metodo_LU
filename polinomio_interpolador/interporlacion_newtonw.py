@@ -41,11 +41,19 @@ print("asi me quedo la lista de vectoes ",lista_de_numeros)
 
 #OBTENER C
 def obtener_c(yn, yn1, xn1, lista_x):
-    denominador = 1
-    for i in lista_x:
-        denominador *= (xn1 - i)
+    primero = True
+    denominador = ""
+    for k in lista_x:
+        if(primero):
+            denominador += "( " + str(xn1) + " - " + str(k) + " )"
+            primero = False
+        else:
+            denominador += " * ( " + str(xn1) + " - " + str(k) + " )"
+    print("denominador: ", denominador)
+    print("resultado del numerador: ", (yn1 - yn))
+    print("resultado denominador: ", eval(denominador))
     #print("el valor de denominador es ", denominador)
-    return ((yn - yn1)/denominador)
+    return ((yn1 - yn)/eval(denominador))
 
 
 #GENERAR LOS P(X)
@@ -67,17 +75,25 @@ for i in range (len(lista_de_numeros) - 1):
         xn  = lista_de_numeros[i][0] 
         lista_x.append(xn)
         xn1 = lista_de_numeros[i+1][0] 
+        print(lista_x)
         c = obtener_c(pn, pn1, xn1, lista_x)
-        denominador = 1
+        pn = pn1
+        denominador = ""
+        primero = True
         for j in lista_x:
-            denominador *= (xn1 - j)
-        pn1 = pn + c * denominador
+            if(primero):
+                denominador += "( " + str(xn1) + " - " + str(j) + " )"
+                primero = False
+            else:
+                denominador += " * ( " + str(xn1) + " - " + str(j) + " )"
+            
+        pn1 = pn + c * eval(denominador)
         
     print("p(", i, ") = ", pn)
     print("p(", i + 1, ") = ", pn1)
     print("\n-----------------------------------------")
     time.sleep(1)
-    pn = pn1
+
 
 
 # la graficacion
