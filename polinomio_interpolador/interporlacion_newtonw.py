@@ -3,6 +3,7 @@ import math
 import time
 import random
 import numpy as np
+import matplotlib.pyplot as plt
 
 banned_x = []
 
@@ -43,7 +44,8 @@ def obtener_c(yn, yn1, xn1, lista_x):
     denominador = 1
     for i in lista_x:
         denominador *= (xn1 - i)
-    return (yn - yn1/denominador)
+    #print("el valor de denominador es ", denominador)
+    return ((yn - yn1)/denominador)
 
 
 #GENERAR LOS P(X)
@@ -78,12 +80,24 @@ for i in range (len(lista_de_numeros) - 1):
     pn = pn1
 
 
+# la graficacion
 
+print("primero graficamos solo los puntos: ")
 
+valores_en_x = []
+valores_en_y = []
 
+for i in range(len(lista_de_numeros)):
+    for J in range (2):
+        if(j==1):
+            valores_en_x.append(lista_de_numeros[i][j])
+        else:
+            valores_en_y.append(lista_de_numeros[i][j])
 
+print("esta es la lista de valores en x",valores_en_x)
+print("esta es la lista de valores en y",valores_en_y)
 
-
+plt.scatter(valores_en_x, valores_en_y)
 
 
 
