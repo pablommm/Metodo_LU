@@ -43,7 +43,10 @@ for i in range(len(lista_de_numeros)):
 
 print("esta es la lista de valores en x",valores_en_x)
 print("esta es la lista de valores en y",valores_en_y)
-print("ahora ordenados",sorted(lista_de_numeros))
+
+# aca aplico un sorted y los organiza por default en base al valor de x
+print("ahora ordenados",sorted(lista_de_numeros)) 
+
 plt.scatter(valores_en_x, valores_en_y)
 
 # Muestra la gráfica
