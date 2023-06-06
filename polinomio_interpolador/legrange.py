@@ -5,7 +5,7 @@ import time
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-import sympy
+import sympy as sym
 
 print("\n---------------------------------------------")
 print ("*********Polinomio interpolador de Newtown*********")
@@ -38,92 +38,56 @@ print("asi me quedo la lista de vectoes ",lista_de_numeros)
 
 valores_en_x = []
 valores_en_y = []
-# separo las puntos en una lista de arrays de valores en X y una lista de valores en Y
 for i in range(len(lista_de_numeros)):
     for j in range (2):
         if(j==1):
-            valores_en_x.append(lista_de_numeros[i][j])
-        else:
             valores_en_y.append(lista_de_numeros[i][j])
+        else:
+            valores_en_x.append(lista_de_numeros[i][j])
 
 xi=valores_en_x
+print("los valores en x son: ",xi)
 fi=valores_en_y
+print("los valores en y son: ",fi)
 
-#aqui declara una variable simbolica
-x = sympy.Symbol('x')
-
-poli = 0
+x = sym.Symbol('x')
+polinomio = 0
 n = len(xi) 
 
-for i in range(0,n,1):
+for i in range(len(lista_de_numeros)):
     numerador = 1
     denominador = 1
-    for j in range(0,n,1):
-        if j!=1:
-            numerador = numerador*(x-xi[j]) 
+    for j in range(len(lista_de_numeros)):
+        if j!=i:
+            numerador = numerador*(x-xi[j])
+            #print("el numerador va tomando el valor: ",numerador)
             denominador = denominador * (xi[i]- xi[j])
+            #print("el denominador va tomando el valor: ",numerador)
         L = numerador/denominador
-        poli = poli + L * fi[i]
-        print("el polinomio se va formando",poli.expand())
+        polinomio = polinomio + L * fi[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
+        
 
-print("el polinimog con legrange sin simplificar es ", L)
-polinomio_simplificado = L.expand()
-print("el polinimio simplificado queda asi: ",polinomio_simplificado)
-"""
-# Interpolacion de Lagrange
-# Polinomio en forma simbólica
-import numpy as np
-import sympy as sym
-import matplotlib.pyplot as plt
+#print("el polinomio con legrange sin simplificar es ",polinomio)
+polisimp = polinomio.expand()
 
-print('INTERPOLACIÓN POLINÓMICA DE LAGRANJE',end="\n\n")
+print("el polinomio simplificado queda asi: ",polisimp)
 
-print("Es una forma de presentar el polinomio que interpola un conjunto de puntos dado. ",end="\n\n")
+#graficamos
 
-# INGRESO , Datos de prueba
+pol = sym.lambdify(x,polisimp)
 
-# Datos de X
-xi = np.array([-1.5, -0.75, 0, 0.75, 1.5])
+a= min(xi)
+print("el valor minimo de x es: ",a)
+b= max(xi)
+print("el valor maximo de x es: ",b)
 
-# Datos de F(X)
-fi = np.array([-14.1014, -0.931596, 0, 0.931596, 14.1014])
 
-# PROCEDIMIENTO
-n = len(xi)
-x = sym.Symbol('x')
-# Polinomio
-polinomio = 0
-for i in range(0,n,1):
-    # Termino de Lagrange
-    termino = 1
-    for j  in range(0,n,1):
-        if (j!=i):
-            termino = termino*(x-xi[j])/(xi[i]-xi[j])
-    print("El L(",i,") es :", termino)
-    polinomio = polinomio + termino*fi[i]
-# Expande el polinomio
-px = polinomio.expand()
-# para evaluacion numérica
-pxn = sym.lambdify(x,polinomio)
+pxi = np.linspace(a,b,50)
+pyi = pol(pxi)# los valores de Y son los valores en X valuados en el polinomio
 
-# Puntos para la gráfica
-a = np.min(xi)
-b = np.max(xi)
-muestras = 101
-xi_p = np.linspace(a,b,muestras)
-fi_p = pxn(xi_p)
 
-# Salida
-print('\nPolinomio de Lagrange, expresiones:')
-print(polinomio)
-print()
-print('Polinomio de Lagrange: ')
-print(px)
-
-# Gráfica
-plt.title('Interpolación Lagrange')
-plt.plot(xi,fi,'o', label = 'Puntos')
-plt.plot(xi_p,fi_p, label = 'Polinomio')
-plt.legend()
+plt.figure()
+plt.scatter(xi,fi)#los puntos
+plt.plot(pxi,pyi,color='red')
+plt.grid()
 plt.show()
-"""
