@@ -26,15 +26,15 @@ for i in range (20):
         if(r == 0):
             while(banned_x.count(n) > 0):
                 n=random.randrange(minimo,maximo)
-                print("se repitio el valor", n)
+                print("Se repitio el valor", n)
             banned_x.append(n)
-            print("se baneo el valor", n)
+            print("Se baneo el valor", n)
         punto.append(n)
         print("agregue el valor ",n)
         print("punto ", punto)
     lista_de_numeros.append(punto)
         
-print("asi me quedo la lista de vectoes ",lista_de_numeros)
+print("Asi quedo la lista de vectores ",lista_de_numeros)
 
 valores_en_x = []
 valores_en_y = []
@@ -46,9 +46,9 @@ for i in range(len(lista_de_numeros)):
             valores_en_x.append(lista_de_numeros[i][j])
 
 xi=valores_en_x
-print("los valores en x son: ",xi)
+print("Los valores en x son: ",xi)
 fi=valores_en_y
-print("los valores en y son: ",fi)
+print("Los valores en y son: ",fi)
 
 x = sym.Symbol('x')
 polinomio = 0
@@ -60,31 +60,29 @@ for i in range(len(lista_de_numeros)):
     for j in range(len(lista_de_numeros)):
         if j!=i:
             numerador = numerador*(x-xi[j])
-            #print("el numerador va tomando el valor: ",numerador)
+            #print("El numerador va tomando el valor: ",numerador)
             denominador = denominador * (xi[i]- xi[j])
-            #print("el denominador va tomando el valor: ",numerador)
+            #print("El denominador va tomando el valor: ",numerador)
         L = numerador/denominador
         polinomio = polinomio + L * fi[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
         
 
-#print("el polinomio con legrange sin simplificar es ",polinomio)
+#print("El polinomio con legrange sin simplificar es ",polinomio)
 polisimp = polinomio.expand()
 
-print("el polinomio simplificado queda asi: ",polisimp)
+print("El polinomio simplificado queda asi: ",polisimp)
 
 #graficamos
 
 pol = sym.lambdify(x,polisimp)
 
 a= min(xi)
-print("el valor minimo de x es: ",a)
+print("El valor minimo de x es: ",a)
 b= max(xi)
-print("el valor maximo de x es: ",b)
-
+print("El valor maximo de x es: ",b)
 
 pxi = np.linspace(a,b,50)
 pyi = pol(pxi)# los valores de Y son los valores en X valuados en el polinomio
-
 
 plt.figure()
 plt.scatter(xi,fi)#los puntos
