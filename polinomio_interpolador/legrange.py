@@ -38,6 +38,7 @@ print("asi me quedo la lista de vectoes ",lista_de_numeros)
 
 valores_en_x = []
 valores_en_y = []
+# separo las puntos en una lista de arrays de valores en X y una lista de valores en Y
 for i in range(len(lista_de_numeros)):
     for j in range (2):
         if(j==1):
@@ -48,8 +49,10 @@ for i in range(len(lista_de_numeros)):
 xi=valores_en_x
 fi=valores_en_y
 
+#aqui declara una variable simbolica
 x = sympy.Symbol('x')
-polinomio = 0
+
+poli = 0
 n = len(xi) 
 
 for i in range(0,n,1):
@@ -57,13 +60,14 @@ for i in range(0,n,1):
     denominador = 1
     for j in range(0,n,1):
         if j!=1:
-            numerador = numerador*(x-xi[j])
+            numerador = numerador*(x-xi[j]) 
             denominador = denominador * (xi[i]- xi[j])
         L = numerador/denominador
-        polinomio = polinomio + L * fi[i]
+        poli = poli + L * fi[i]
+        print("el polinomio se va formando",poli.expand())
 
-print("el polinimog con legrange sin simplificar es ",L)
-polinomio_simplificado = polinomio.expand()
+print("el polinimog con legrange sin simplificar es ", L)
+polinomio_simplificado = L.expand()
 print("el polinimio simplificado queda asi: ",polinomio_simplificado)
 """
 # Interpolacion de Lagrange
