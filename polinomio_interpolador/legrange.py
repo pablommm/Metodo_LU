@@ -35,7 +35,7 @@ for i in range (20):
     lista_de_numeros.append(punto)
 
  
-#lista_de_numeros = [[9, 15], [17, 17], [5, 14], [12, 11], [14, 9]] 
+lista_de_numeros = [[9, 15], [17, 17], [5, 14], [12, 11], [14, 9]] 
 print("Asi quedo la lista de vectores ",lista_de_numeros)
 
 valores_en_x = []
