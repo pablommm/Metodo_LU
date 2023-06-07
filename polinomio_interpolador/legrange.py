@@ -26,16 +26,17 @@ for i in range (20):
         if(r == 0):
             while(banned_x.count(n) > 0):
                 n=random.randrange(minimo,maximo)
-                #print("Se repitio el valor: ", n)
+                print("Se repitio el valor: ", n)
             banned_x.append(n)
             print("Se baneo el valor: ", n)
         punto.append(n)
-        #print("Agregue el valor: ",n)
-        print("Se crego el punto: ", punto)
+        print("Agregue el valor: ",n)
+        print("Se agrego el punto: ", punto)
     lista_de_numeros.append(punto)
 
 time.sleep(1)# hacemos una pausa para mostrar la lista de puntos
-
+lista_de_numeros = sorted(lista_de_numeros)
+#lista_de_numeros = [[37, 25], [40, 2], [11, 34], [12, 9], [46, 9], [1, 49], [31, 20]]
 print("\nAsi quedo la lista de vectores \n",lista_de_numeros)
 
 # aqui separamos en valores en X y valores en Y
@@ -51,11 +52,21 @@ for i in range(len(lista_de_numeros)):
 
 time.sleep(1) # hacemos una pausa para mostrar los valores por separado
 
+lista_numeros_descendente = lista_de_numeros.copy()
+lista_numeros_ascendente = lista_de_numeros.copy()
+
+def myFunc(e):
+  return e[0]
+
+lista_numeros_descendente.sort(reverse=False, key=myFunc)
+lista_numeros_ascendente.sort(reverse=True, key=myFunc)
+
 xi=valores_en_x
 print("\nLos valores en x son: ",xi)
 fi=valores_en_y
 print("\nLos valores en y son: ",fi)
 
+lista_de_numeros
 
 ################################ aqui comenzamos a calcular ################################
 
@@ -91,6 +102,7 @@ polisimp = polinomio.expand()
 print("\n-----------------------------------------")
 print("\nEsta es la forma final del polinomio: \n",polisimp)
 print("\n-----------------------------------------")
+
 ################################ aqui comenzamos a graficar ################################
 
 pol = sym.lambdify(x,polisimp)
