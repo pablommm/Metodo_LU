@@ -10,13 +10,13 @@ import sympy as sym
 print("\n---------------------------------------------")
 print ("*********Polinomio interpolador de Legrange*********")
 print("\n---------------------------------------------")
+# en esta seccion definimos las cotas
+print("Generaremos 20 numeros al azar, ahora necesitaremos establecer las cotas")
+maximo=int(input("Indique el valor maximo que podran tomar: "))
+minimo=int(input("Indique ahora el valor minimo que podran tomar: "))
+banned_x = []#  aqui almacenamos los valores en x que ya se tomaron para que no se repitan
 
-print("Debemos geneara 20 numeros al azar")
-maximo=int(input("Indique el valor maximo que podra tomar: "))
-minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
-banned_x = []
-
-lista_de_numeros = []
+lista_de_numeros = [] # almacenamos los vectores que usaremos
 print("\n---------------------------------------------")
 
 for i in range (20):
@@ -26,18 +26,19 @@ for i in range (20):
         if(r == 0):
             while(banned_x.count(n) > 0):
                 n=random.randrange(minimo,maximo)
-                print("Se repitio el valor", n)
+                #print("Se repitio el valor: ", n)
             banned_x.append(n)
-            print("Se baneo el valor", n)
+            print("Se baneo el valor: ", n)
         punto.append(n)
-        print("agregue el valor ",n)
-        print("punto ", punto)
+        #print("Agregue el valor: ",n)
+        print("Se crego el punto: ", punto)
     lista_de_numeros.append(punto)
 
- 
-lista_de_numeros = [[9, 15], [17, 17], [5, 14], [12, 11], [14, 9]] 
-print("Asi quedo la lista de vectores ",lista_de_numeros)
+time.sleep(1)# hacemos una pausa para mostrar la lista de puntos
 
+print("\nAsi quedo la lista de vectores \n",lista_de_numeros)
+
+# aqui separamos en valores en X y valores en Y
 valores_en_x = []
 valores_en_y = []
 for i in range(len(lista_de_numeros)):
@@ -47,14 +48,22 @@ for i in range(len(lista_de_numeros)):
         else:
             valores_en_y.append(lista_de_numeros[i][j])
 
-xi=valores_en_x
-print("Los valores en x son: ",xi)
-fi=valores_en_y
-print("Los valores en y son: ",fi)
 
+time.sleep(1) # hacemos una pausa para mostrar los valores por separado
+
+xi=valores_en_x
+print("\nLos valores en x son: ",xi)
+fi=valores_en_y
+print("\nLos valores en y son: ",fi)
+
+
+################################ aqui comenzamos a calcular ################################
+
+
+# definimos la variable simbolica
 x = sym.Symbol('x')
+#  inicializamos el polinomio
 polinomio = 0
-n = len(xi) 
 
 for i in range(len(lista_de_numeros)):
     numerador = 1
@@ -62,28 +71,36 @@ for i in range(len(lista_de_numeros)):
     for j in range(len(lista_de_numeros)):
         if j!=i:
             numerador = numerador*(x-xi[j])
-            #print("El numerador va tomando el valor: ",numerador)
             denominador = denominador * (xi[i]- xi[j])
-            #print("El denominador va tomando el valor: ",numerador)
+    
+    time.sleep(1)
+    print("\n-----------------------------------------")
+    print("Iteracion numero: ",i)
+    print("\n-----------------------------------------")
+    #print("\nAsi va quedando el numerador: ",numerador)       
+    #print("\nAsi va quedando el denominador: ",denominador)
+    print("\nAsi va quedando el polinomio: \n", polinomio)
     L = numerador/denominador
     polinomio = polinomio + L * fi[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
+    
+    
         
-
+time.sleep(2)
 #print("El polinomio con legrange sin simplificar es ",polinomio)
 polisimp = polinomio.expand()
-
-print("El polinomio simplificado queda asi: ",polisimp)
-
-#graficamos
+print("\n-----------------------------------------")
+print("\nEsta es la forma final del polinomio: \n",polisimp)
+print("\n-----------------------------------------")
+################################ aqui comenzamos a graficar ################################
 
 pol = sym.lambdify(x,polisimp)
 
 a= min(xi)
-print("El valor minimo de x es: ",a)
+#print("El valor minimo de x es: ",a)
 b= max(xi)
-print("El valor maximo de x es: ",b)
+#print("El valor maximo de x es: ",b)
 
-pxi = np.linspace(a,b,200)
+pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
 pyi = pol(pxi)# los valores de Y son los valores en X valuados en el polinomio
 
 plt.figure()
