@@ -42,10 +42,10 @@ valores_en_x = []
 valores_en_y = []
 for i in range(len(lista_de_numeros)):
     for j in range (2):
-        if(j==1):
-            valores_en_y.append(lista_de_numeros[i][j])
-        else:
+        if(j==0):
             valores_en_x.append(lista_de_numeros[i][j])
+        else:
+            valores_en_y.append(lista_de_numeros[i][j])
 
 xi=valores_en_x
 print("Los valores en x son: ",xi)
