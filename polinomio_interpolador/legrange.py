@@ -66,7 +66,7 @@ print("\nLos valores en x son: ",xi)
 fi=valores_en_y
 print("\nLos valores en y son: ",fi)
 
-lista_de_numeros
+
 
 ################################ aqui comenzamos a calcular ################################
 

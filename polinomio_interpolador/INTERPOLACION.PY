@@ -1,45 +1,84 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import random
+import sympy as sym
+import time
+time.sleep(1)
+print("\n---------------------------------------------")
+print ("*********Polinomio interpolador de Newtown*********")
+print("\n---------------------------------------------")
 
-# Establecer cotas para los pares (x, y)
-cota_inferior = -10
-cota_superior = 10
+print("Debemos geneara 20 numeros al azar")
+maximo=int(input("Indique el valor maximo que podra tomar: "))
+minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
 
-# Generar 20 pares de números aleatorios dentro de las cotas
-np.random.seed(42)  # Para reproducibilidad
-x = np.sort(np.random.uniform(cota_inferior, cota_superior, size=20))
-y = np.random.uniform(cota_inferior, cota_superior, size=20)
-print("valores en x son ",x)
-print("valores en y son ",y)
-# Ordenar los pares según x
-indices_ordenados = np.argsort(x)
-x = x[indices_ordenados]
-y = y[indices_ordenados]
+banned_x = []
+lista_de_numeros = []
+print("\n---------------------------------------------")
 
-# Obtener el grado del polinomio interpolador (Newton)
+for i in range (20):
+    punto=[]
+    for r in range(2):
+        n=random.randrange(minimo,maximo)
+        if(r == 0):
+            while(banned_x.count(n) > 0):
+                n=random.randrange(minimo,maximo)
+                #print("se repitio el valor", n)
+            banned_x.append(n)
+            #print("se baneo el valor", n)
+        punto.append(n)
+        #print("agregue el valor ",n)
+        #print("punto ", punto)
+    lista_de_numeros.append(punto)
+
+time.sleep(1)       
+print("\nAsi me quedo la lista de vectores ",lista_de_numeros)
+
+# Aqui separamos en valores en X y valores en Y
+x = []
+y = []
+for i in range(len(lista_de_numeros)):
+    for j in range (2):
+        if(j==0):
+            x.append(lista_de_numeros[i][j])
+        else:
+            y.append(lista_de_numeros[i][j])
+
+print("\nLos valores en x son: ",x)
+print("\nLos valores en y son: ",y)
+# sacamos el grado del polinomio interpolador (Newton)
 grado_newton = len(x) - 1
-#print("Grado del polinomio interpolador por el método de Newton:", grado_newton)
+print("\nEste es el grado del polinomio interpolador en newton:", grado_newton)
+time.sleep(1)
+print("\n---------------------------------------------")
+print("\n Empezamos a calcular las diferencias divididas  ")
+print("\n---------------------------------------------")
 
-# Calcular las diferencias divididas
-diferencias_divididas = np.zeros((grado_newton + 1, grado_newton + 1))
-diferencias_divididas[:, 0] = y
-print()
-
+# empezamos a calcular las diferencias divididas
+diferencias_divididas = np.zeros((grado_newton + 1, grado_newton + 1))# creamos la matriz
+diferencias_divididas[:, 0] = y #inicializamos la primer columan de la matriz con los valores en Y
+print("\n creamos una matriz para almacenar las diferencias divididas, comenzamos agregando los valore en y: ",diferencias_divididas)
+time.sleep(1)
+# utilizamos este bucle para calcular el resto de las diferencias divididas
 for j in range(1, grado_newton + 1):
     for i in range(j, grado_newton + 1):
         diferencias_divididas[i, j] = (diferencias_divididas[i, j - 1] - diferencias_divididas[i - 1, j - 1]) / (x[i] - x[i - j])
 
-# Construir el polinomio interpolador (Newton)
+
+print("\n Despues de hacer los calculos asi queda la matriz : \n",diferencias_divididas)
+
+# el metodo para construir el polinomio interpolador (Newton)
 def polinomio_interpolador_newton(x_eval):
     resultado = diferencias_divididas[0, 0]
     producto = 1
     for i in range(1, grado_newton + 1):
         producto *= (x_eval - x[i - 1])
-        resultado += diferencias_divididas[i, i] * producto
+        resultado += diferencias_divididas[i, i] * producto        
     return resultado
 
+time.sleep(1)        
 # Graficar el polinomio interpolador y los pares de datos
-x_vals = np.linspace(cota_inferior, cota_superior, 1000)
+x_vals = np.linspace(minimo, maximo, 1000)
 y_vals = polinomio_interpolador_newton(x_vals)
 
 plt.figure(figsize=(8, 6))
@@ -52,46 +91,86 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-# Ordenar los pares al revés y obtener otro polinomio interpolador
+
+print("\n---------------------------------------------")
+print("\n Ahora ordenamos los valores al reves \n ")
+print("\n---------------------------------------------")
+# Ordenamos los pares al revés
 x_rev = x[::-1]
 y_rev = y[::-1]
 
-# Obtener el grado del polinomio interpolador (al revés)
-grado_newton_rev = len(x_rev) - 1
-print("Grado del polinomio interpolador (al revés):", grado_newton_rev)
+print("\nLos valores en x son: ",x_rev)
+print("\nLos valores en y son: ",y_rev)
+time.sleep(1)
 
-# Calcular las diferencias divididas para el polinomio al revés
-diferencias_divididas_rev = np.zeros((grado_newton_rev + 1, grado_newton_rev + 1))
-diferencias_divididas_rev[:, 0] = y_rev
+# el grado del polinomio interpolador (al revés)
+print("\n el gradro de polinomio sigue siendo el mismo \n", len(x_rev))
 
+# Calcular el polinomio interpolador con Legange
+print("\n---------------------------------------------")
+print ("*********Polinomio interpolador de Legrange*********")
+print("\n---------------------------------------------")
+# el grado del polinomio interpolador 
+print("\n el gradro de polinomio sigue siendo el mismo \n", len(x_rev))
 
-for j in range(1, grado_newton_rev + 1):
-    for i in range(j, grado_newton_rev + 1):
-        diferencias_divididas_rev[i, j] = (diferencias_divididas_rev[i, j - 1] - diferencias_divididas_rev[i - 1, j - 1]) / (x_rev[i] - x_rev[i - j])
-        #print("estas son las diferencias divididas",diferencias_divididas_rev)
-# Construir el polinomio interpolador (al revés)
-def polinomio_interpolador_newton_rev(x_eval):
-    resultado = diferencias_divididas_rev[0, 0]
-    producto = 1
-    for i in range(1, grado_newton_rev + 1):
-        producto *= (x_eval - x_rev[i - 1])
-        resultado += diferencias_divididas_rev[i, i] * producto
-    return resultado
+# definimos la variable simbolica
+x = sym.Symbol('x')
+#  inicializamos el polinomio
+polinomio = 0
 
-# Graficar el polinomio interpolador (al revés) y los pares de datos
-y_vals_rev = polinomio_interpolador_newton_rev(x_vals)
+for i in range(len(lista_de_numeros)):
+    numerador = 1
+    denominador = 1
+    for j in range(len(lista_de_numeros)):
+        if j!=i:
+            numerador = numerador*(x-x_rev[j])
+            denominador = denominador * (x_rev[i]- x_rev[j])
+    
+    time.sleep(1)
+    print("\n-----------------------------------------")
+    print("Iteracion numero: ",i)
+    print("\n-----------------------------------------")
+    #print("\nAsi va quedando el numerador: ",numerador)       
+    #print("\nAsi va quedando el denominador: ",denominador)
+    print("\nAsi va quedando el polinomio: \n", polinomio)
+    L = numerador/denominador
+    polinomio = polinomio + L * y_rev[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
+    
+    
+        
+time.sleep(1)
+#print("El polinomio con legrange sin simplificar es ",polinomio)
+polisimp = polinomio.expand()
+print("\n-----------------------------------------")
+print("\nEsta es la forma final del polinomio: \n",polisimp)
+print("\n-----------------------------------------")
 
-plt.figure(figsize=(8, 6))
-plt.plot(x_vals, y_vals_rev, label='Polinomio interpolador (al revés)')
-plt.scatter(x_rev, y_rev, color='red', label='Pares de datos')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('Interpolación polinómica (al revés)')
-plt.legend()
-plt.grid(True)
+################################ aqui comenzamos a graficar ################################
+
+pol = sym.lambdify(x,polisimp)
+
+a= min(x_rev)
+#print("El valor minimo de x es: ",a)
+b= max(x_rev)
+#print("El valor maximo de x es: ",b)
+
+pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
+pyi = pol(pxi)# los valores de Y son los valores en X valuados en el polinomio
+
+plt.figure()
+plt.scatter(x_rev,y_rev)#los puntos
+plt.plot(pxi,pyi,color='red')
+plt.grid()
 plt.show()
 
+
+# Construir el polinomio interpolador (al revés)
+
+# Graficar el polinomio interpolador (al revés) y los pares de datos
+
 # Función para encontrar una raíz del polinomio interpolador por el método de Newton
+
+"""
 def encontrar_raiz_newton(polinomio, x_inicial, tolerancia=1e-6, max_iter=100):
     x_actual = x_inicial
     iteracion = 0
@@ -108,3 +187,4 @@ def encontrar_raiz_newton(polinomio, x_inicial, tolerancia=1e-6, max_iter=100):
 # Encontrar una raíz del polinomio interpolador (Newton)
 raiz = encontrar_raiz_newton(polinomio_interpolador_newton, x[0])
 print("Raíz del polinomio interpolador (Newton):", raiz)
+"""
