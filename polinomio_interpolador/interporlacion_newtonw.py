@@ -5,9 +5,6 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-banned_x = []
-
-
 print("\n---------------------------------------------")
 print ("*********Polinomio interpolador de Newtown*********")
 print("\n---------------------------------------------")
@@ -17,7 +14,7 @@ print("Debemos geneara 20 numeros al azar")
 maximo=int(input("Indique el valor maximo que podra tomar: "))
 minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
 
-
+banned_x = []
 lista_de_numeros = []
 print("\n---------------------------------------------")
 
@@ -36,7 +33,7 @@ for i in range (20):
         print("punto ", punto)
     lista_de_numeros.append(punto)
         
-print("asi me quedo la lista de vectoes ",lista_de_numeros)
+print("asi me quedo la lista de vectores ",lista_de_numeros)
 
 
 #OBTENER C
