@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sym
 
+"""
 print("\n---------------------------------------------")
 print ("*********Polinomio interpolador de Legrange*********")
 print("\n---------------------------------------------")
@@ -65,58 +66,78 @@ xi=valores_en_x
 print("\nLos valores en x son: ",xi)
 fi=valores_en_y
 print("\nLos valores en y son: ",fi)
+"""
 
 
 
-################################ aqui comenzamos a calcular ################################
+def intepolacion_lagrange(lista_de_numeros):
+
+    ################################ aqui comenzamos a calcular ################################
 
 
-# definimos la variable simbolica
-x = sym.Symbol('x')
-#  inicializamos el polinomio
-polinomio = 0
+    # definimos la variable simbolica
+    x = sym.Symbol('x')
+    #  inicializamos el polinomio
+    polinomio = 0
+    """
+    f = sym.Symbol('x')
+    polinomio = sym.Poly(2*f**3 + 4*f**2 - 5*f + 1, f)
+    grado = polinomio.degree()
+    """
 
-for i in range(len(lista_de_numeros)):
-    numerador = 1
-    denominador = 1
-    for j in range(len(lista_de_numeros)):
-        if j!=i:
-            numerador = numerador*(x-xi[j])
-            denominador = denominador * (xi[i]- xi[j])
-    
-    time.sleep(1)
-    print("\n-----------------------------------------")
-    print("Iteracion numero: ",i)
-    print("\n-----------------------------------------")
-    #print("\nAsi va quedando el numerador: ",numerador)       
-    #print("\nAsi va quedando el denominador: ",denominador)
-    print("\nAsi va quedando el polinomio: \n", polinomio)
-    L = numerador/denominador
-    polinomio = polinomio + L * fi[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
-    
-    
+
+
+    for i in range(len(lista_de_numeros)):
+        numerador = 1
+        denominador = 1
+        for j in range(len(lista_de_numeros)):
+            if j!=i:
+                numerador = numerador*(x-xi[j])
+                denominador = denominador * (xi[i]- xi[j])
         
-time.sleep(2)
-#print("El polinomio con legrange sin simplificar es ",polinomio)
-polisimp = polinomio.expand()
-print("\n-----------------------------------------")
-print("\nEsta es la forma final del polinomio: \n",polisimp)
-print("\n-----------------------------------------")
+        time.sleep(1)
+        print("\n-----------------------------------------")
+        print("Iteracion numero: ",i)
+        print("\n-----------------------------------------")
+        #print("\nAsi va quedando el numerador: ",numerador)       
+        #print("\nAsi va quedando el denominador: ",denominador)
+        print("\nAsi va quedando el polinomio: \n", polinomio)
+        L = numerador/denominador
+        #print("asi va quedando L: ", L)
+        polinomio = polinomio + L * fi[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
+        
 
-################################ aqui comenzamos a graficar ################################
+            
+    time.sleep(2)
+    #print("El polinomio con legrange sin simplificar es ",polinomio)
+    polisimp = polinomio.expand()
+    print("\n-----------------------------------------")
+    print("\nEsta es la forma final del polinomio: \n",polisimp)
+    print("\n-----------------------------------------")
 
-pol = sym.lambdify(x,polisimp)
+    cualquiera = sym.Poly(polinomio)
 
-a= min(xi)
-#print("El valor minimo de x es: ",a)
-b= max(xi)
-#print("El valor maximo de x es: ",b)
+    print("El grado del polinomio es:", cualquiera.degree())
 
-pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
-pyi = pol(pxi)# los valores de Y son los valores en X valuados en el polinomio
 
-plt.figure()
-plt.scatter(xi,fi)#los puntos
-plt.plot(pxi,pyi,color='red')
-plt.grid()
-plt.show()
+    ################################ aqui comenzamos a graficar ################################
+
+    pol_legrange = sym.lambdify(x,polisimp)
+
+    valor_en_y = cualquiera.subs(x,0)
+    print("valor en y es ", valor_en_y)
+    a= min(xi)
+    #print("El valor minimo de x es: ",a)
+    b= max(xi)
+    #print("El valor maximo de x es: ",b)
+    pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
+    pyi = pol_legrange(pxi)# los valores de Y son los valores en X valuados en el polinomio
+    plt.title('Interpolación de Lagrange pero usamos la escala de forma exponencial')
+    plt.scatter(xi,fi)#los puntos
+    plt.plot(pxi,pyi,color='red')
+    plt.grid()
+    for i, j in zip(xi, fi):
+        plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
+    plt.yscale('symlog')
+    plt.show()
+        
