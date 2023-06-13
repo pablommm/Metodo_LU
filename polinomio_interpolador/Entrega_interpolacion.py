@@ -5,6 +5,7 @@ import sympy as sym
 import time
 import math
 from legrange.py import intepolacion_lagrange
+from newtown.py import interpolacion_newton
 
 time.sleep(1)
 
