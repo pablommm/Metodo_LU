@@ -50,6 +50,15 @@ for i in range(len(lista_de_numeros)):
         else:
             y.append(lista_de_numeros[i][j])
 
+lista_numeros_descendente = lista_de_numeros.copy()
+lista_numeros_ascendente = lista_de_numeros.copy()
+
+def myFunc(e):
+  return e[0]
+
+lista_numeros_descendente.sort(reverse=False, key=myFunc)
+lista_numeros_ascendente.sort(reverse=True, key=myFunc)
+
 print("\nLos valores en x son: ",x)
 print("\nLos valores en y son: ",y)
 
