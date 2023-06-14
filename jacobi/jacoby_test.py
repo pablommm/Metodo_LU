@@ -1,6 +1,7 @@
 import numpy as np
 import pprint
 import time 
+import matplotlib.pyplot as plt
 
 print('MÉTODO DE JACOBI',end="\n\n")
 
@@ -25,38 +26,38 @@ U = np.zeros([m,m]) # defino la matriz superior
 b = np.array([[0],[0],[0]],float) # defino el vector solucion
 x = np.array([[0],[0],[0]],float) # Vector de Inicio
 x0 = np.array([[0],[0],[0]],float)
-e = 0.00001
+e = 0.00001 # el margen de error
 # Numéro de iteraciones maximo antes de arrojar error
-maxite=1000
-margen = 10000
-
+maxite = 1000
+margen = 1000
+array_de_errores = []
 # Matriz de 3x3 para hacer pruebas
-#A = np.array([[3,-1,-1],[-1,3,1],[2,1,4],],float)
+A = np.array([[3,-1,-1],[-1,3,1],[2,1,4],],float)
 
 #aqui se ingresan los valores de la matriz
-
+"""
 print("Porfavor ingrese los elementos de la matriz(3x3) a trabajar con Jacobi\n")
 for r in range(0,m):
     for c in range(0,m):
         A [r,c]=(input("elemento a["+str(r+1)+","+str(c+1)+"]: "))
         A [r,c]=float(A[r,c])
-
+"""
 # Vector Solución para hacer pruebas 
-#b = np.array([[1],[3],[7],],float)
-
+b = np.array([[1],[3],[7],],float)
+"""
 #aqui se ingresan los valores del vector
 print("Porfavor ingrese los elementos del vector(3)\n")
 for r in range(0,m):
     b [r]=(input("elemento a["+str(r+1)+"]: "))
     
-
+"""
 #--------------------------------------------------------------------------------
 print("\nUsted ingreso la matriz A")
 print(A)
-
+time.sleep(1)
 print("\nUsted ingreso el vector b")
 print(b)
-
+time.sleep(1)
 for  r  in  range(m):
     for  c  in  range(m):
         if (r==c):
@@ -94,7 +95,7 @@ time.sleep(1)
 xk = np.array([[0],[0],[0]],float)
 
 print("El metodo tomara las partes recien vistas para obtener de manera iterativa\n",
-       "una aproximacion a la solucion usandop la propiedad:\n", 
+       "una aproximacion a la solucion usando la propiedad:\n", 
        "x(k+1) = -D-1 (L+U) x(k) + D-1 b\n",
        "siendo en el primer paso x(k) el vector [0, 0, 0]")
 time.sleep(1)
@@ -134,11 +135,47 @@ while(margen > e):
 		print("El sistema ya no converge ya que la norma de x(k+1) - x(k) no tiende a 0")
 		quit()
 	print("Mi margen de error actual es de:\n" + str(margen))
+	array_de_errores.append(margen)
 	x0 = xk.copy()
 	print("----------------------------------------\n")
 	time.sleep(1)
 
 
-print("Mi sistema convergio al vector solucion x =\n" + str(xk.round(5)))
-print("Se requirieron " + str(n) + " pasos para lograrlo")
-print("El margen de error actual es de:" + str(margen))
+print("\nMi sistema convergio al vector solucion x =\n" + str(xk.round(3)))
+print("\nSe requirieron " + str(n) + " pasos para lograrlo")
+print("\nEl margen de error actual es de: " + str(margen))
+
+print("----------------------------------------")
+print("--------------COMPROBACION--------------")
+print("----------------------------------------\n")
+# comprobacion
+
+primer_ecuacion=0
+segunda_ecuacion=0
+tercer_ecuacion=0
+
+for  f  in  range(m):
+    for  c  in  range(m):
+        if(f==0):
+            primer_ecuacion = primer_ecuacion + A[f,c]*xk[c] 
+        if(f==1):
+            segunda_ecuacion = segunda_ecuacion + A[f,c]*xk[c]
+        if(f==2):
+            tercer_ecuacion = tercer_ecuacion + A[f,c]*xk[c]
+            
+print("\nAl remplazar los valores obtenidos por jacobi en el sistemas de ecuaciones podemos comprobar si coinciden con el sistema solucion b")
+print("\n (los valores estan truncados)")
+print("\n el resultado de remplazar ",xk[0]," en la primer ecuacion da como resultado ",primer_ecuacion," y la solucion esperada es ",b[0])
+print("\n el resultado de remplazar ",xk[1]," en la segunda ecuacion da como resultado ",segunda_ecuacion," y la solucion esperada es ",b[1])
+print("\n el resultado de remplazar ",xk[2]," en la tercer ecuacion da como resultado ",tercer_ecuacion," y la solucion esperada es ",b[2])
+
+
+# graficacion tendencia del error
+
+plt.figure()
+plt.xlabel('pasos de la iteracion')
+plt.ylabel('valor del margen')
+plt.title('progreso en el margen de error con jacobi')
+plt.plot(range(len(array_de_errores)),array_de_errores,color='red')
+plt.grid()
+plt.show()
