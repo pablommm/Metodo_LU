@@ -144,6 +144,7 @@ while(margen > e):
 print("\nMi sistema convergio al vector solucion x =\n" + str(xk.round(3)))
 print("\nSe requirieron " + str(n) + " pasos para lograrlo")
 print("\nEl margen de error actual es de: " + str(margen))
+print("La tolerancia usada es de ",e)
 
 print("----------------------------------------")
 print("--------------COMPROBACION--------------")

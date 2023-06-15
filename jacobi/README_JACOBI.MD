@@ -2,7 +2,7 @@ METODO DE JACOBI
 
 Integrantes: 
 - Murgia Pablo Martin
-- Walter Nicolas Gonzalez
+- Gonzalez Walter Nicolas 
 
 Consigna
 
