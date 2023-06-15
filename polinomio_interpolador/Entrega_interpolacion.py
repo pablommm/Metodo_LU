@@ -4,8 +4,8 @@ import random
 import sympy as sym
 import time
 import math
-from legrange.py import intepolacion_lagrange
-from newtown.py import interpolacion_newton
+from legrange import intepolacion_legrange
+from newton import interpolacion_newton
 
 time.sleep(1)
 
@@ -70,5 +70,5 @@ print("\n---------------------------------------------")
 
 interpolacion_newton(lista_de_numeros)
 
-interpolacion_legrange(lista_de_numeros)
+intepolacion_legrange(lista_de_numeros)
     

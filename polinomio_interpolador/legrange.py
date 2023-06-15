@@ -70,8 +70,23 @@ print("\nLos valores en y son: ",fi)
 
 
 
-def intepolacion_lagrange(lista_de_numeros):
-
+def intepolacion_legrange(lista_de_numeros):
+    
+    print("\n---------------------------------------------")
+    print("\n Empezamos a calcular por el metodo de legrange  ")
+    print("\n---------------------------------------------")
+    # aqui separamos en valores en X y valores en Y
+    valores_en_x = []
+    valores_en_y = []
+    for i in range(len(lista_de_numeros)):
+        for j in range (2):
+            if(j==0):
+                valores_en_x.append(lista_de_numeros[i][j])
+            else:
+                valores_en_y.append(lista_de_numeros[i][j])
+    
+    xi=valores_en_x
+    fi=valores_en_y
     ################################ aqui comenzamos a calcular ################################
 
 
@@ -125,7 +140,7 @@ def intepolacion_lagrange(lista_de_numeros):
     pol_legrange = sym.lambdify(x,polisimp)
 
     valor_en_y = cualquiera.subs(x,0)
-    print("valor en y es ", valor_en_y)
+    #print("valor en y es ", valor_en_y)
     a= min(xi)
     #print("El valor minimo de x es: ",a)
     b= max(xi)
