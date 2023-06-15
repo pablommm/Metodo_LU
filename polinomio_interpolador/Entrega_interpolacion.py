@@ -70,5 +70,18 @@ print("\n---------------------------------------------")
 
 interpolacion_newton(lista_de_numeros)
 
-intepolacion_legrange(lista_de_numeros)
-    
+lista_numeros_al_reves = lista_de_numeros[::-1]
+
+print("\n---------------------------------------------")
+print("\n Con la lista de numeros al reves  ")
+print("\n---------------------------------------------")
+
+intepolacion_legrange(lista_numeros_al_reves)
+
+lista_numeros_desordenados = random.sample(lista_de_numeros,len(lista_de_numeros))
+
+print("\n---------------------------------------------")
+print("\n Con la lista de numeros desordenados  ")
+print("\n---------------------------------------------")
+
+intepolacion_legrange(lista_numeros_desordenados)
