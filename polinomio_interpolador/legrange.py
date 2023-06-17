@@ -155,4 +155,53 @@ def intepolacion_legrange(lista_de_numeros):
         plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
     plt.yscale('symlog')
     plt.show()
-        
+    
+
+def polinomio_legrange(lista_de_numeros):
+
+    # aqui separamos en valores en X y valores en Y
+    valores_en_x = []
+    valores_en_y = []
+    for i in range(len(lista_de_numeros)):
+        for j in range (2):
+            if(j==0):
+                valores_en_x.append(lista_de_numeros[i][j])
+            else:
+                valores_en_y.append(lista_de_numeros[i][j])
+    
+    xi=valores_en_x
+    fi=valores_en_y
+    ################################ aqui comenzamos a calcular ################################
+
+
+    # definimos la variable simbolica
+    x = sym.Symbol('x')
+    #  inicializamos el polinomio
+    polinomio = 0
+    """
+    polinomio = sym.Poly(2*f**3 + 4*f**2 - 5*f + 1, f)
+    grado = polinomio.degree()
+    """
+    for i in range(len(lista_de_numeros)):
+        numerador = 1
+        denominador = 1
+        for j in range(len(lista_de_numeros)):
+            if j!=i:
+                numerador = numerador*(x-xi[j])
+                denominador = denominador * (xi[i]- xi[j])
+        L = numerador/denominador
+        polinomio = polinomio + L * fi[i] # aqui vamos almacenando las partes del polinomio que se van almacenando
+
+    #print("El polinomio con legrange sin simplificar es ",polinomio)
+    polisimp = polinomio.expand()
+
+    #polinomio = sym.Poly(polinomio)
+
+    return polinomio
+
+
+
+lista_de_numeros_aux= [[31, 54], [72, 91], [80, 59], [27, 70], [91, 43], [43, 31], [58, 32], [73, 62], [61, 99], [0, 63], [47, 52], [6, 97], [32, 51], [17, 89], [68, 15], [64, 30], [53, 86], [97, 18], [56, 53], [65, 70]]
+
+print(polinomio_legrange(lista_de_numeros_aux))
+    
