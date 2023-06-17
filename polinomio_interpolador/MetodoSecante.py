@@ -17,6 +17,7 @@ funcion = polinomio_legrange(lista_de_numeros_aux)
 # funcion = lambda x: x**3 + 4*(x**2) -10
 # x = sym.Symbol('x')
 # polinomio = sym.Poly(polinomio)
+
 def secante (f,x1,x2,tolerancia):
     error =10000
     n = 0
