@@ -5,6 +5,7 @@ import sympy as sym
 import time
 import math
 from legrange import intepolacion_legrange
+from legrange import polinomio_legrange
 from newton import interpolacion_newton
 
 time.sleep(1)
@@ -68,7 +69,7 @@ print("\n---------------------------------------------")
 print("\n Empezamos a calcular las diferencias divididas  ")
 print("\n---------------------------------------------")
 
-interpolacion_newton(lista_de_numeros)
+#interpolacion_newton(lista_de_numeros)
 
 lista_numeros_al_reves = lista_de_numeros[::-1]
 
@@ -76,7 +77,7 @@ print("\n---------------------------------------------")
 print("\n Con la lista de numeros al reves  ")
 print("\n---------------------------------------------")
 
-intepolacion_legrange(lista_numeros_al_reves)
+#intepolacion_legrange(lista_numeros_al_reves)
 
 lista_numeros_desordenados = random.sample(lista_de_numeros,len(lista_de_numeros))
 
@@ -84,4 +85,9 @@ print("\n---------------------------------------------")
 print("\n Con la lista de numeros desordenados  ")
 print("\n---------------------------------------------")
 
-intepolacion_legrange(lista_numeros_desordenados)
+#intepolacion_legrange(lista_numeros_desordenados)
+
+
+raices = sym.solvers.solve(polinomio_legrange(lista_de_numeros))
+
+print(raices)
