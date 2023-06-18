@@ -7,6 +7,7 @@ import math
 from legrange import intepolacion_legrange
 from legrange import polinomio_legrange
 from newton import interpolacion_newton
+from MetodoSecante import secante
 
 time.sleep(1)
 
@@ -19,6 +20,7 @@ maximo=int(input("Indique el valor maximo que podra tomar: "))
 minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
 banned_x = []
 lista_de_numeros = []
+tolerancia = 0.0000001
 
 print("\n---------------------------------------------")
 
@@ -87,7 +89,6 @@ print("\n---------------------------------------------")
 
 #intepolacion_legrange(lista_numeros_desordenados)
 
+#raices = sym.solvers.solve(polinomio_legrange(lista_de_numeros))
 
-raices = sym.solvers.solve(polinomio_legrange(lista_de_numeros))
-
-print(raices)
+secante(polinomio_legrange(lista_de_numeros),x[0],x[1],tolerancia)
