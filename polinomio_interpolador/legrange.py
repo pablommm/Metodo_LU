@@ -71,10 +71,11 @@ print("\nLos valores en y son: ",fi)
 
 
 def intepolacion_legrange(lista_de_numeros):
-    
+    """
     print("\n---------------------------------------------")
     print("\n Empezamos a calcular por el metodo de legrange  ")
     print("\n---------------------------------------------")
+    """
     # aqui separamos en valores en X y valores en Y
     valores_en_x = []
     valores_en_y = []

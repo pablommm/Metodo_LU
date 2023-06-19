@@ -12,10 +12,10 @@ from MetodoSecante import secante
 time.sleep(1)
 
 print("\n---------------------------------------------")
-print ("*********Polinomio interpolador de Newtown*********")
+print ("********* Interpoladocion *********")
 print("\n---------------------------------------------")
 
-print("Debemos geneara 20 numeros al azar")
+print("Aqui vamos a genearar 20 numeros al azar")
 maximo=int(input("Indique el valor maximo que podra tomar: "))
 minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
 banned_x = []
