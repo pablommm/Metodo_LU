@@ -68,7 +68,7 @@ print("\nLos valores en y son: ",y)
 time.sleep(1)
 
 print("\n---------------------------------------------")
-print("\n Empezamos a calcular las diferencias divididas  ")
+print("\n Empezamos a calcular el polinomio segun el metodo de newton  ")
 print("\n---------------------------------------------")
 
 interpolacion_newton(lista_de_numeros)
@@ -78,20 +78,21 @@ time.sleep(1)
 print("\n---------------------------------------------")
 print("\n Empezamos a calcular con el metodo de Legrange con la lista de numeros al reves  ")
 print("\n---------------------------------------------")
-
+print("\nEsta es la lista de numeros al reves ",lista_numeros_al_reves)
 intepolacion_legrange(lista_numeros_al_reves)
+
 
 lista_numeros_desordenados = random.sample(lista_de_numeros,len(lista_de_numeros))
 time.sleep(1)
 print("\n---------------------------------------------")
 print("\n Empezamos a calcular con el metodo de Legrange con la lista de numeros desordenados  ")
 print("\n---------------------------------------------")
-
+print("\nEsta es la lista de numeros desordenados ",lista_numeros_desordenados)
 intepolacion_legrange(lista_numeros_desordenados)
 
 #raices = sym.solvers.solve(polinomio_legrange(lista_de_numeros))
 time.sleep(1)
 print("\n---------------------------------------------")
-print("\n calculamos una raiz con el metodo secante ")
+print("\n Ahora calcularemos una raiz de este polinomio con el metodo secante ")
 print("\n---------------------------------------------")
 secante(polinomio_legrange(lista_de_numeros),x[0],x[1],tolerancia)
