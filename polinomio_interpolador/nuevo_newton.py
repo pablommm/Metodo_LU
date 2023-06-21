@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
+import sympy as sym
 from scipy.interpolate import lagrange
 from numpy.polynomial.polynomial import Polynomial
 

@@ -4,6 +4,9 @@ import time
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy as sym
+
+
 
 banned_x = []
 
@@ -99,10 +102,13 @@ for j in range (len(lista_de_numeros)):
         print("p(", j, ") = ", pn_str)
         print("\n-----------------------------------------")
         time.sleep(1)     
-    
-    
-        
-    
+
+x = sym.Symbol('x') 
+resultado = sym.Poly(pn_str) 
+grado = resultado.degree()
+print("\n-----------------------------------------")  
+print(" finalmente obtuve p(", j, ") = \n", resultado)  
+print("-----------------------------------------")    
             
 
 
@@ -110,7 +116,7 @@ for j in range (len(lista_de_numeros)):
 
 # la graficacion
 
-print("primero graficamos solo los puntos: ")
+""" print("primero graficamos solo los puntos: ")
 valores_en_x = []
 valores_en_y = []
 for i in range(len(lista_de_numeros)):
@@ -123,9 +129,52 @@ for i in range(len(lista_de_numeros)):
 print("esta es la lista de valores en x",valores_en_x)
 print("esta es la lista de valores en y",valores_en_y)
 
+plt.scatter(valores_en_x, valores_en_y) """
+plt.title('Interpolación de Newton')
+valores_en_x = []
+valores_en_y = []
+for i in range(len(lista_de_numeros)):
+    for j in range (2):
+        if(j==0):
+            valores_en_x.append(lista_de_numeros[i][j])
+        else:
+            valores_en_y.append(lista_de_numeros[i][j])
 plt.scatter(valores_en_x, valores_en_y)
 
+
+
+
+pol_newton = sym.lambdify(x, resultado.as_expr())
+pxi = np.linspace(min(valores_en_x), max(valores_en_x), 200) 
+pyi = pol_newton(pxi)
+
+
+
+solutions = sym.solve(resultado.as_expr(), x)
+
+print("ENTRO AL AREA DE PRUEBAS")
+for d in range(len(valores_en_x)):
+    print("\n--------------------------------------")
+    print("estoy estudiando el valor: ", valores_en_x[d])
+    print("espero el valor: ", valores_en_y[d])
+    print("con pol_newton obtuve el valor: ", pol_newton(valores_en_x[d]))
+    print("con sym.solve obtuve el valor: ", sym.solve(resultado.as_expr(), valores_en_x[d]))
+    print("\n--------------------------------------")
+    time.sleep(1)
+
+
+
+solutions = sym.solve(resultado.as_expr(), x)
+
+#pyi = sym.solve(resultado.as_expr(), pxi)
+plt.plot(pxi, pyi, color='red')
+plt.grid()
+for i, j in zip(valores_en_x, valores_en_y):
+    plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
+plt.yscale('symlog')
 plt.show()
+
+
 
 
 
