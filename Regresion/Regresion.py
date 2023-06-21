@@ -108,6 +108,11 @@ r_obtenido, _ = pearsonr(data.acumulados, funcion_1(data.dia))
 
 print("El r obtenido es de: ", r_obtenido)
 
+b = 1
+a = 1
+y = b*x**a
+
+p = np.polyfit(data.dia, np.log(y), 1)
 
 plt.scatter(data.dia, data.acumulados)
 plt.plot(data.dia, funcion_1(data.dia))
