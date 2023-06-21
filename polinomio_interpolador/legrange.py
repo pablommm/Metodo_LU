@@ -133,7 +133,7 @@ def intepolacion_legrange(lista_de_numeros):
 
     cualquiera = sym.Poly(polinomio)
 
-    print("El grado del polinomio es:", cualquiera.degree())
+    print("\nEl grado del polinomio es: ", cualquiera.degree())
 
     ################################ aqui comenzamos a graficar ################################
 
