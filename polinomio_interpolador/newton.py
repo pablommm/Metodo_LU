@@ -5,17 +5,14 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sym
-
-
+#from Entrega_interpolacion import lista_de_numeros
 
 banned_x = []
 
 
-print("\n---------------------------------------------")
-print ("*********Polinomio interpolador de Newtown*********")
-print("\n---------------------------------------------")
 
 
+"""
 print("Debemos geneara 20 numeros al azar")
 maximo=int(input("Indique el valor maximo que podra tomar: "))
 minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
@@ -39,9 +36,13 @@ for i in range (5):
         print("punto ", punto)
     lista_de_numeros.append(punto)
         
-print("asi me quedo la lista de vectoes ",lista_de_numeros)
-
+print("asi me quedo la lista de vectores ",lista_de_numeros)
+"""
 def polinomio_newton(puntos):
+    
+    print("\n---------------------------------------------")
+    print ("*********Polinomio interpolador de Newtown*********")
+    print("\n---------------------------------------------")
     # Separate x and y values from the points
     x = [p[0] for p in puntos]
     y = [p[1] for p in puntos]
@@ -72,7 +73,7 @@ def polinomio_newton(puntos):
     return interpolacion
 
 
-print("RESULTADO: \n", polinomio_newton(lista_de_numeros))
+#print("RESULTADO: \n", polinomio_newton(lista_de_numeros))
 
 """
 x = sym.Symbol('x') 

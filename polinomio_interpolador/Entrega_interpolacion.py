@@ -6,7 +6,7 @@ import time
 import math
 from legrange import intepolacion_legrange
 from legrange import polinomio_legrange
-from newton import interpolacion_newton
+from newton import polinomio_newton
 from MetodoSecante import secante
 
 time.sleep(1)
@@ -71,7 +71,7 @@ print("\n---------------------------------------------")
 print("\n Empezamos a calcular el polinomio segun el metodo de newton  ")
 print("\n---------------------------------------------")
 
-interpolacion_newton(lista_de_numeros)
+polinomio_newton(lista_de_numeros)
 
 lista_numeros_al_reves = lista_de_numeros[::-1]
 time.sleep(1)
