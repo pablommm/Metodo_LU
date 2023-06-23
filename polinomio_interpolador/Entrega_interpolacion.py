@@ -71,28 +71,59 @@ print("\n---------------------------------------------")
 print("\n Empezamos a calcular el polinomio segun el metodo de newton  ")
 print("\n---------------------------------------------")
 
-polinomio_newton(lista_de_numeros)
+resultado_newton=polinomio_newton(lista_de_numeros)
+print("\nLa forma final del polinomio de newton es :",resultado_newton)
 
-lista_numeros_al_reves = lista_de_numeros[::-1]
+
 time.sleep(1)
+
 print("\n---------------------------------------------")
 print("\n Empezamos a calcular con el metodo de Legrange con la lista de numeros al reves  ")
 print("\n---------------------------------------------")
+
+lista_numeros_al_reves = lista_de_numeros[::-1]
 print("\nEsta es la lista de numeros al reves ",lista_numeros_al_reves)
-intepolacion_legrange(lista_numeros_al_reves)
 
+#intepolacion_legrange(lista_numeros_al_reves)
 
-lista_numeros_desordenados = random.sample(lista_de_numeros,len(lista_de_numeros))
 time.sleep(1)
+
 print("\n---------------------------------------------")
 print("\n Empezamos a calcular con el metodo de Legrange con la lista de numeros desordenados  ")
 print("\n---------------------------------------------")
-print("\nEsta es la lista de numeros desordenados ",lista_numeros_desordenados)
-intepolacion_legrange(lista_numeros_desordenados)
 
-#raices = sym.solvers.solve(polinomio_legrange(lista_de_numeros))
+lista_numeros_desordenados = random.sample(lista_de_numeros,len(lista_de_numeros))
+print("\nEsta es la lista de numeros desordenados ",lista_numeros_desordenados)
+
+#intepolacion_legrange(lista_numeros_desordenados)
+
 time.sleep(1)
 print("\n---------------------------------------------")
 print("\n Ahora calcularemos una raiz de este polinomio con el metodo secante ")
 print("\n---------------------------------------------")
-secante(polinomio_legrange(lista_de_numeros),x[0],x[1],tolerancia)
+
+#secante(polinomio_legrange(lista_de_numeros),x[0],x[1],tolerancia)
+
+# graficamos
+
+
+# en esta linea espero tomar el polinomio de newton y poder trabajarlo como una funcion
+poly_newton = sym.Poly(resultado_newton)
+fun_newton = sym.lambdify(x,poly_newton)
+
+
+#print("valor en y es ", valor_en_y)
+a= min(x)
+#print("El valor minimo de x es: ",a)
+b= max(x)
+#print("El valor maximo de x es: ",b)
+pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
+pyi = fun_newton(pxi)# los valores de Y son los valores en X valuados en el polinomio
+plt.title('ahora graficaremos lo obtenido')
+plt.scatter(x,y)#los puntos
+plt.plot(pxi,pyi,color='red')
+plt.grid()
+for i, j in zip(x, y):
+    plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
+plt.yscale('symlog')
+plt.show()

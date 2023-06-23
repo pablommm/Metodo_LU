@@ -9,16 +9,15 @@ import sympy as sym
 
 banned_x = []
 
-
-
-
+lista_de_numeros = []
 """
 print("Debemos geneara 20 numeros al azar")
 maximo=int(input("Indique el valor maximo que podra tomar: "))
 minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
 
-
 lista_de_numeros = []
+
+
 print("\n---------------------------------------------")
 
 for i in range (5):
@@ -69,9 +68,10 @@ def polinomio_newton(puntos):
 
         termino += f' * {dd[i][0]}'
         interpolacion += f' + {termino}'
-
+        time.sleep(1)
+        print("\nEsta es la iteracion numero: ",i)
+        print("\nAsi va quedando el polinomio con el metodo de newton :", interpolacion)
     return interpolacion
-
 
 #print("RESULTADO: \n", polinomio_newton(lista_de_numeros))
 
@@ -117,8 +117,6 @@ for d in range(len(valores_en_x)):
     print("\n--------------------------------------")
     time.sleep(1)
 
-
-
 solutions = sym.solve(resultado.as_expr(), x)
 
 #pyi = sym.solve(resultado.as_expr(), pxi)
@@ -131,20 +129,3 @@ plt.show()
 
 
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
