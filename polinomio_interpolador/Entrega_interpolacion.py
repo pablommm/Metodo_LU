@@ -12,7 +12,7 @@ from MetodoSecante import secante
 time.sleep(1)
 
 print("\n---------------------------------------------")
-print ("********* Interpoladocion *********")
+print ("********* Interpolacion *********")
 print("\n---------------------------------------------")
 
 print("Aqui vamos a genearar 20 numeros al azar")
