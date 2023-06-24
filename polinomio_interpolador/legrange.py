@@ -101,8 +101,6 @@ def intepolacion_legrange(lista_de_numeros):
     grado = polinomio.degree()
     """
 
-
-
     for i in range(len(lista_de_numeros)):
         numerador = 1
         denominador = 1

@@ -8,9 +8,9 @@ import sympy as sym
 #from Entrega_interpolacion import lista_de_numeros
 
 banned_x = []
-
 lista_de_numeros = []
 
+"""
 print("Debemos geneara 20 numeros al azar")
 maximo=int(input("Indique el valor maximo que podra tomar: "))
 minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
@@ -34,7 +34,7 @@ for i in range (5):
     lista_de_numeros.append(punto)
         
 print("asi me quedo la lista de vectores ",lista_de_numeros)
-
+"""
 def polinomio_newton(puntos):
     
     print("\n---------------------------------------------")
@@ -69,17 +69,17 @@ def polinomio_newton(puntos):
 
         termino += f' * {dd[i][0]}'
         interpolacion += f' + {termino}'
-        """ time.sleep(1)
-        print("\nEsta es la iteracion numero: ",i)
-        print("\nAsi va quedando el polinomio con el metodo de newton :", interpolacion) """
+        #time.sleep(1)
+        #print("\nEsta es la iteracion numero: ",i)
+        #print("\nAsi va quedando el polinomio con el metodo de newton :", interpolacion)
         parseado =sym.parsing.sympy_parser.parse_expr(interpolacion, evaluate=False)
     return parseado
 
-print("El polinomio de newton es: \n", polinomio_newton(lista_de_numeros))
+#print("El polinomio de newton es: \n", polinomio_newton(lista_de_numeros))
 
-cadena = polinomio_newton(lista_de_numeros)
-parseado =sym.parsing.sympy_parser.parse_expr(cadena, evaluate=False)
-print("\n El polinomio luego del parseo quedo como: \n", parseado)
+#cadena = polinomio_newton(lista_de_numeros)
+#parseado =sym.parsing.sympy_parser.parse_expr(cadena, evaluate=False)
+#print("\n El polinomio luego del parseo quedo como: \n", parseado)
 #print("RESULTADO: \n", polinomio_newton(lista_de_numeros))
 
 """
