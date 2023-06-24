@@ -103,7 +103,9 @@ print("\n Ahora calcularemos una raiz de este polinomio con el metodo secante ")
 print("\n---------------------------------------------")
 
 #secante(polinomio_legrange(lista_de_numeros),x[0],x[1],tolerancia)
-
+print("\n---------------------------------------------")
+print("\n ahora graficaremos lo obtenido ")
+print("\n---------------------------------------------")
 # graficamos
 
 
