@@ -134,7 +134,7 @@ def intepolacion_legrange(lista_de_numeros):
     print("\nEl grado del polinomio es: ", cualquiera.degree())
 
     ################################ aqui comenzamos a graficar ################################
-
+    """
     pol_legrange = sym.lambdify(x,polisimp)
 
     valor_en_y = cualquiera.subs(x,0)
@@ -153,7 +153,7 @@ def intepolacion_legrange(lista_de_numeros):
         plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
     plt.yscale('symlog')
     plt.show()
-    
+    """
 def polinomio_legrange(lista_de_numeros):
 
     # aqui separamos en valores en X y valores en Y
