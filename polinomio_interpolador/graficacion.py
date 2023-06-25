@@ -5,7 +5,7 @@ import sympy as sym
 
 
 
-def graficacion(valores_en_x,valores_en_y,funcion):
+def graficacion(valores_en_x,valores_en_y,funcion,mensaje):
     x = sym.Symbol('x')
     print("\n---------------------------------------------")
     print("\n ahora graficaremos lo obtenido ")
@@ -30,6 +30,7 @@ def graficacion(valores_en_x,valores_en_y,funcion):
     plt.plot(pxi,pyi,color='blue')
     plt.plot(pxi,pyi,color='red')
     plt.title('usamos la escala de forma exponencial')
+    plt.title(mensaje)
     plt.scatter(valores_en_x,valores_en_y) #los puntos
     plt.grid()
     for i, j in zip(valores_en_x, valores_en_y):
@@ -38,7 +39,7 @@ def graficacion(valores_en_x,valores_en_y,funcion):
     plt.show()
     
 
-def graficacion_con_raiz(valores_en_x,valores_en_y,funcion,raiz):
+def graficacion_con_raiz(valores_en_x,valores_en_y,funcion,mensaje,raiz):
     x = sym.Symbol('x')
     print("\n---------------------------------------------")
     print("\n ahora graficaremos lo obtenido ")
@@ -58,6 +59,7 @@ def graficacion_con_raiz(valores_en_x,valores_en_y,funcion,raiz):
 
     plt.plot(pxi,pyi,color='red')
     plt.title('usamos la escala de forma exponencial ')
+    plt.title(mensaje)
     plt.scatter(valores_en_x,valores_en_y) #los puntos
     plt.scatter(raiz, funcion(raiz), color='green', label='la raiz encontrada')
     plt.grid()

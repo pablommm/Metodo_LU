@@ -78,7 +78,8 @@ print("\nLa forma final del polinomio de newton es :\n",resultado_newton)
 print("\nEl grado del polinomio obtenido en newton es ", grado_newton)
 print("\nMostramos como quedaria el grafico ")
 fun_newton = sym.lambdify(x,resultado_newton)
-graficacion(valores_en_x,valores_en_y,fun_newton)
+mensaje_newton = "Polinomio obtenido por Newton"
+graficacion(valores_en_x,valores_en_y,fun_newton,mensaje_newton)
 time.sleep(1)
 
 print("\n----------------------------------------------------------------------------------------")
@@ -94,17 +95,10 @@ grado_resultado_legrange_al_reves = resultado_legrange_al_reves.as_poly().degree
 funcion_legrange_alreves= sym.lambdify(x,resultado_legrange_al_reves)
 print("\nEl grado del polinomio obtenido en legrange es ", grado_resultado_legrange_al_reves)
 print("\nMostramos como quedaria el grafico ")
-graficacion(valores_en_x,valores_en_y,funcion_legrange_alreves)
+mensaje_legrange_alreves = "polinomio obtenido por legrange, con valores al reves"
+graficacion(valores_en_x,valores_en_y,funcion_legrange_alreves,mensaje_legrange_alreves)
 
-print("\n*****************************************************************************")
-time.sleep(1)
 
-if (grado_newton == grado_resultado_legrange_al_reves):
-    print("\nPodemos observar que ambos tienen el mismo grado\n")
-else:
-    print("\nPodemos observar que no tienen el mismo grado\n")
-
-print("\n*****************************************************************************")
 time.sleep(1)
 
 print("\n----------------------------------------------------------------------------------------")
@@ -120,9 +114,20 @@ grado_resultado_legrange_desordenado = resultado_legrange_desordenado.as_poly().
 funcion_legrange_desordenados= sym.lambdify(x,resultado_legrange_al_reves)
 print("\nEl grado del polinomio obtenido en legrange es ", grado_resultado_legrange_desordenado)
 print("\nMostramos como quedaria el grafico ")
-graficacion(valores_en_x,valores_en_y,funcion_legrange_desordenados)
+mensaje_legrange_desordenado = "polinomio obtenido por legrange, con valores desordenados"
+graficacion(valores_en_x,valores_en_y,funcion_legrange_desordenados,mensaje_legrange_desordenado)
 
 time.sleep(1)
+
+print("\n*****************************************************************************")
+time.sleep(1)
+
+if (grado_newton == grado_resultado_legrange_al_reves):
+    print("\nPodemos observar que los todos estos polinomios tienen el mismo grado\n")
+else:
+    print("\nEstos polinomios no tienen el mismo grado\n")
+
+print("\n*****************************************************************************")
 
 print("\n----------------------------------------------------------------------------------------")
 print("\n Ahora calcularemos una raiz del polinomio de legrange con el metodo secante ")
@@ -133,7 +138,8 @@ raiz_obtenida = secante(funcion_legrange_alreves,valores_en_x[0],valores_en_x[1]
 print("\n----------------------------------------------------------------------------------------")
 print("\n ahora graficaremos lo obtenido ")
 print("\n----------------------------------------------------------------------------------------")
-graficacion_con_raiz(valores_en_x,valores_en_y,fun_newton,raiz_obtenida)
+mensaje_final = "El primero polinomio marcando en verde la raiz obtenida"
+graficacion_con_raiz(valores_en_x,valores_en_y,fun_newton,mensaje_final,raiz_obtenida)
 
 
 print("\n despues de haber calculado el polinomio tanto por el metodo de Legrange como por el metodo de newton, podemos concluir que mientras lo puntos sean los mismos sin importar su orden obtenemos el mismo polinomio ")
