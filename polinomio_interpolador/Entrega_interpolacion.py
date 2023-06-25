@@ -142,7 +142,8 @@ mensaje_final = "El primero polinomio marcando en verde la raiz obtenida"
 graficacion_con_raiz(valores_en_x,valores_en_y,fun_newton,mensaje_final,raiz_obtenida)
 
 
-print("\n despues de haber calculado el polinomio tanto por el metodo de Legrange como por el metodo de newton, podemos concluir que mientras lo puntos sean los mismos sin importar su orden obtenemos el mismo polinomio ")
-
+print("\n Despues de haber calculado el polinomio tanto por el metodo de Legrange como por el metodo de newton, podemos concluir que mientras lo puntos sean los mismos sin importar su orden obtenemos el mismo polinomio ")
 
 print("\n y que a pesar de tener diferencias en las expresiones algebraicas la representacion grafica de estas se vera igual")
+
+print("\nPodemos concluir entronces que sea n una cantidad de puntos, solo existe un polinomio de grado igual a N-1 que pase por todo esos puntos, sin importar con que metodo se obtenga")
