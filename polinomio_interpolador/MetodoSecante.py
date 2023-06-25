@@ -43,5 +43,7 @@ def secante (f,x1,x2,tolerancia):
     print("solucion aproxiamada : {: .4f}".format(x3))
     print("numero de iteracion : {:d}".format(n))
     print("la tolerancia usada es de: ",tolerancia)
+    
+    return x3
           
 #secante(polinomio_legrange(lista_de_numeros_aux),x1,x2,tolerancia)

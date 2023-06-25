@@ -69,9 +69,9 @@ def polinomio_newton(puntos):
 
         termino += f' * {dd[i][0]}'
         interpolacion += f' + {termino}'
-        #time.sleep(1)
-        #print("\nEsta es la iteracion numero: ",i)
-        #print("\nAsi va quedando el polinomio con el metodo de newton :", interpolacion)
+        time.sleep(1)
+        print("\nEsta es la iteracion numero: ",i)
+        print("\nAsi va quedando el polinomio con el metodo de newton :", interpolacion)
         parseado =sym.parsing.sympy_parser.parse_expr(interpolacion, evaluate=False)
     return parseado
 

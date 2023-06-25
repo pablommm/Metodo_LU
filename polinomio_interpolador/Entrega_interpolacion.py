@@ -4,11 +4,12 @@ import random
 import sympy as sym
 import time
 import math
-from legrange import intepolacion_legrange
+from legrange import interpolacion_legrange
 from legrange import polinomio_legrange
 from newton import polinomio_newton
 from MetodoSecante import secante
-
+from graficacion import graficacion
+from graficacion import graficacion_con_raiz
 time.sleep(1)
 
 print("\n---------------------------------------------")
@@ -52,7 +53,7 @@ for i in range(len(lista_de_numeros)):
             valores_en_x.append(lista_de_numeros[i][j])
         else:
             valores_en_y.append(lista_de_numeros[i][j])
-
+"""
 lista_numeros_descendente = lista_de_numeros.copy()
 lista_numeros_ascendente = lista_de_numeros.copy()
 
@@ -61,78 +62,81 @@ def myFunc(e):
 
 lista_numeros_descendente.sort(reverse=False, key=myFunc)
 lista_numeros_ascendente.sort(reverse=True, key=myFunc)
-
+"""
 print("\nLos valores en x son: ",valores_en_x)
 print("\nLos valores en y son: ",valores_en_y)
 
 time.sleep(1)
 
-print("\n---------------------------------------------")
+print("\n----------------------------------------------------------------------------------------")
 print("\n Empezamos a calcular el polinomio segun el metodo de newton  ")
-print("\n---------------------------------------------")
+print("\n----------------------------------------------------------------------------------------")
 
 resultado_newton = polinomio_newton(lista_de_numeros)
-
+grado_newton = resultado_newton.as_poly().degree()
 print("\nLa forma final del polinomio de newton es :\n",resultado_newton)
-
+print("\nEl grado del polinomio obtenido en newton es ", grado_newton)
+print("\nMostramos como quedaria el grafico ")
+fun_newton = sym.lambdify(x,resultado_newton)
+graficacion(valores_en_x,valores_en_y,fun_newton)
 time.sleep(1)
 
-print("\n---------------------------------------------")
+print("\n----------------------------------------------------------------------------------------")
 print("\n Empezamos a calcular con el metodo de Legrange con la lista de numeros al reves  ")
-print("\n---------------------------------------------")
+print("\n----------------------------------------------------------------------------------------")
 
 lista_numeros_al_reves = lista_de_numeros[::-1]
 print("\nEsta es la lista de numeros al reves ",lista_numeros_al_reves)
 
-intepolacion_legrange(lista_numeros_al_reves)
+interpolacion_legrange(lista_numeros_al_reves)
 resultado_legrange_al_reves = polinomio_legrange(lista_numeros_al_reves)
+grado_resultado_legrange_al_reves = resultado_legrange_al_reves.as_poly().degree()
+funcion_legrange_alreves= sym.lambdify(x,resultado_legrange_al_reves)
+print("\nEl grado del polinomio obtenido en legrange es ", grado_resultado_legrange_al_reves)
+print("\nMostramos como quedaria el grafico ")
+graficacion(valores_en_x,valores_en_y,funcion_legrange_alreves)
+
+print("\n*****************************************************************************")
 time.sleep(1)
 
-print("\n---------------------------------------------")
+if (grado_newton == grado_resultado_legrange_al_reves):
+    print("\nPodemos observar que ambos tienen el mismo grado\n")
+else:
+    print("\nPodemos observar que no tienen el mismo grado\n")
+
+print("\n*****************************************************************************")
+time.sleep(1)
+
+print("\n----------------------------------------------------------------------------------------")
 print("\n Empezamos a calcular con el metodo de Legrange con la lista de numeros desordenados  ")
-print("\n---------------------------------------------")
+print("\n----------------------------------------------------------------------------------------")
 
 lista_numeros_desordenados = random.sample(lista_de_numeros,len(lista_de_numeros))
 print("\nEsta es la lista de numeros desordenados ",lista_numeros_desordenados)
 
-#intepolacion_legrange(lista_numeros_desordenados)
+interpolacion_legrange(lista_numeros_desordenados)
+resultado_legrange_desordenado = polinomio_legrange(lista_numeros_al_reves)
+grado_resultado_legrange_desordenado = resultado_legrange_desordenado.as_poly().degree()
+funcion_legrange_desordenados= sym.lambdify(x,resultado_legrange_al_reves)
+print("\nEl grado del polinomio obtenido en legrange es ", grado_resultado_legrange_desordenado)
+print("\nMostramos como quedaria el grafico ")
+graficacion(valores_en_x,valores_en_y,funcion_legrange_desordenados)
 
 time.sleep(1)
-print("\n---------------------------------------------")
-print("\n Ahora calcularemos una raiz de este polinomio con el metodo secante ")
-print("\n---------------------------------------------")
 
-#secante(polinomio_legrange(lista_de_numeros),x[0],x[1],tolerancia)
-print("\n---------------------------------------------")
+print("\n----------------------------------------------------------------------------------------")
+print("\n Ahora calcularemos una raiz del polinomio de legrange con el metodo secante ")
+print("\n----------------------------------------------------------------------------------------")
+
+raiz_obtenida = secante(funcion_legrange_alreves,valores_en_x[0],valores_en_x[1],tolerancia)
+
+print("\n----------------------------------------------------------------------------------------")
 print("\n ahora graficaremos lo obtenido ")
-print("\n---------------------------------------------")
-# graficamos
+print("\n----------------------------------------------------------------------------------------")
+graficacion_con_raiz(valores_en_x,valores_en_y,fun_newton,raiz_obtenida)
 
 
+print("\n despues de haber calculado el polinomio tanto por el metodo de Legrange como por el metodo de newton, podemos concluir que mientras lo puntos sean los mismos sin importar su orden obtenemos el mismo polinomio ")
 
 
-#print("valor en y es ", valor_en_y)
-a= min(valores_en_x)
-#print("El valor minimo de x es: ",a)
-b= max(valores_en_x)
-#print("El valor maximo de x es: ",b)
-
-#fun_legrange_al_reves = sym.lambdify(x,resultado_legrange_al_reves)
-pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
-pyi = resultado_legrange_al_reves(pxi)# los valores de Y son los valores en X valuados en el polinomio
-#plt.plot(pxi,pyi,color='blue')
-
-fun_newton = sym.lambdify(x,resultado_newton)
-pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
-pyi = fun_newton(pxi)# los valores de Y son los valores en X valuados en el polinomio
-#plt.plot(pxi,pyi,color='red')
-
-plt.plot(pxi,pyi,color='blue')
-plt.plot(pxi,pyi,color='red')
-plt.title('ahora graficaremos lo obtenido')
-plt.scatter(valores_en_x,valores_en_y) #los puntos
-plt.grid()
-for i, j in zip(valores_en_x, valores_en_y):
-    plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
-plt.yscale('symlog')
-plt.show()
+print("\n y que a pesar de tener diferencias en las expresiones algebraicas la representacion grafica de estas se vera igual")

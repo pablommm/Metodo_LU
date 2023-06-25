@@ -1,53 +1,67 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import sympy as sym
 
 
-print("Debemos geneara 20 numeros al azar")
-maximo=int(input("Indique el valor maximo que podra tomar: "))
-minimo=int(input("Indique ahora el valor minimo que podra tomar: "))
-banned_x = []
 
-lista_de_numeros = []
-print("\n---------------------------------------------")
+def graficacion(valores_en_x,valores_en_y,funcion):
+    x = sym.Symbol('x')
+    print("\n---------------------------------------------")
+    print("\n ahora graficaremos lo obtenido ")
+    print("\n---------------------------------------------")
 
-for i in range (20):
-    punto=[]
-    for r in range(2):
-        n=random.randrange(minimo,maximo)
-        if(r == 0):
-            while(banned_x.count(n) > 0):
-                n=random.randrange(minimo,maximo)
-                print("se repitio el valor", n)
-            banned_x.append(n)
-            print("se baneo el valor", n)
-        punto.append(n)
-        print("agregue el valor ",n)
-        print("punto ", punto)
-    lista_de_numeros.append(punto)
-        
-print("asi me quedo la lista de vectores ",lista_de_numeros)
+    #print("valor en y es ", valor_en_y)
+    a= min(valores_en_x)
+    #print("El valor minimo de x es: ",a)
+    b= max(valores_en_x)
+    #print("El valor maximo de x es: ",b)
+
+    #fun_legrange_al_reves = sym.lambdify(x,resultado_legrange_al_reves)
+    pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
+    pyi = funcion(pxi)# los valores de Y son los valores en X valuados en el polinomio
+    #plt.plot(pxi,pyi,color='blue')
+
+    #fun_newton = sym.lambdify(x,funcion)
+    pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
+    pyi = funcion(pxi)# los valores de Y son los valores en X valuados en el polinomio
+    #plt.plot(pxi,pyi,color='red')
+
+    plt.plot(pxi,pyi,color='blue')
+    plt.plot(pxi,pyi,color='red')
+    plt.title('usamos la escala de forma exponencial')
+    plt.scatter(valores_en_x,valores_en_y) #los puntos
+    plt.grid()
+    for i, j in zip(valores_en_x, valores_en_y):
+        plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
+    plt.yscale('symlog')
+    plt.show()
+    
+
+def graficacion_con_raiz(valores_en_x,valores_en_y,funcion,raiz):
+    x = sym.Symbol('x')
+    print("\n---------------------------------------------")
+    print("\n ahora graficaremos lo obtenido ")
+    print("\n---------------------------------------------")
+
+    #print("valor en y es ", valor_en_y)
+    a= min(valores_en_x)
+    #print("El valor minimo de x es: ",a)
+    b= max(valores_en_x)
+    #print("El valor maximo de x es: ",b)
+
+    #fun_legrange_al_reves = sym.lambdify(x,resultado_legrange_al_reves)
+    pxi = np.linspace(a,b,200)# tomamos el valor "a" mas chico de las X, el valor "b" mas alto, como limitees y hacemos un muestro de 200 puntos
+    pyi = funcion(pxi)# los valores de Y son los valores en X valuados en el polinomio
+    #plt.plot(pxi,pyi,color='blue')
 
 
-print("primero graficamos solo los puntos: ")
-
-valores_en_x = []
-valores_en_y = []
-
-for i in range(len(lista_de_numeros)):
-    for j in range (2):
-        if(j==0):
-            valores_en_x.append(lista_de_numeros[i][j])
-        else:
-            valores_en_y.append(lista_de_numeros[i][j])
-
-print("esta es la lista de valores en x",valores_en_x)
-print("esta es la lista de valores en y",valores_en_y)
-
-# aca aplico un sorted y los organiza por default en base al valor de x
-print("ahora ordenados",sorted(lista_de_numeros)) 
-
-plt.scatter(valores_en_x, valores_en_y)
-
-# Muestra la gráfica
-plt.show()
+    plt.plot(pxi,pyi,color='red')
+    plt.title('usamos la escala de forma exponencial ')
+    plt.scatter(valores_en_x,valores_en_y) #los puntos
+    plt.scatter(raiz, funcion(raiz), color='green', label='la raiz encontrada')
+    plt.grid()
+    for i, j in zip(valores_en_x, valores_en_y):
+        plt.annotate(f'({i}, {j})', (i, j), textcoords="offset points", xytext=(0,10), ha='center')
+    plt.yscale('symlog')
+    plt.show()
