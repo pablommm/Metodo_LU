@@ -113,6 +113,8 @@ a = 1
 y = b*x**a
 
 p = np.polyfit(data.dia, np.log(y), 1)
+#p = np.polyfit(data.dia, data.acumulados, 1)
+
 
 plt.scatter(data.dia, data.acumulados)
 plt.plot(data.dia, funcion_1(data.dia))
