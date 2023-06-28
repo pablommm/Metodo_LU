@@ -8,12 +8,8 @@ import numpy as np
 import math
 
 #print(os.getcwd())
-data = pd.read_csv('./Regresion/ACUMULADOS_vs_DIAS.csv')
+data = pd.read_csv('Metodo_LU/Regresion/ACUMULADOS_vs_DIAS.csv')
 #excel = pd.read_excel('./Regresion/ACUMULADOS_vs_DIAS.xlsx')
-
-
-
-
 
 #LINEAL
 n = len(data)
@@ -90,7 +86,8 @@ error_cuadrado = rse_lineal(data.dia, data.acumulados, a_obtenido, b_obtenido)
 print("El error obtenido es: ", error_cuadrado)
 
 x = sym.Symbol("x")
-funcion_1 = lambda x: 1406.5942618467504*x -62138.47083685545
+
+funcion_1 = eval("lambda x: " + recta.split(" = ")[1])
 
 #r_obtenido = calcular_r(data.acumulados, funcion(data.dia))
 r_obtenido, _ = pearsonr(data.acumulados, funcion_1(data.dia))
@@ -129,7 +126,7 @@ print("El error obtenido es: ", error_cuadrado)
 print("El r obtenido es de: ", r_obtenido_polinomico, "\n")
 time.sleep(2)
 
-
+funcion_2 = eval("lambda x: " + recta_polinomica.split(" = ")[1])
 
 print("----------------------------------------------------------")
 print("------------------MODELO EXPONENCIAL----------------------")
@@ -146,7 +143,7 @@ def regresion_exponencial(x , y):
 
 a_exponencial, b_exponencial = regresion_exponencial(data.dia, data.acumulados)
 
-funcion_3 = lambda x: b_exponencial * math.e** (a_exponencial * x)
+funcion_3 = lambda x: b_exponencial * math.e ** (a_exponencial * x)
 r_obtenido_exponencial, _ = pearsonr(data.acumulados, funcion_3(data.dia))
 
 print("El valor de a es: ", a_exponencial )
@@ -158,20 +155,23 @@ print("El error obtenido es: ", error_cuadrado_exponencial)
 print("El r obtenido es de: ", r_obtenido_exponencial, "\n")
 
 
-
-
-
-
-"""
 b = 1
 a = 1
 y = b*x**a
 
-p = np.polyfit(data.dia, np.log(y), 1)
+#p = np.polyfit(data.dia, np.log(y), 1)
 #p = np.polyfit(data.dia, data.acumulados, 1)
+plt.figtext(0.15, 0.65, 'R lineal '+str(r_obtenido), fontsize=8, ha='left',color='blue')
+plt.figtext(0.15, 0.60, 'R polinomica '+str(r_obtenido_polinomico), fontsize=8, ha='left',color='red')
+plt.figtext(0.15, 0.55, 'R exponencial '+str(r_obtenido_exponencial), fontsize=8, ha='left',color='green')
+plt.figtext(0.15, 0.50, 'error lineal '+str(error_cuadrado), fontsize=8, ha='left',color='blue')
+plt.figtext(0.15, 0.45, 'error polinomica '+str(error_cuadrado_polinomico), fontsize=8, ha='left',color='red')
+plt.figtext(0.15, 0.40, 'error exponencial '+str(error_cuadrado_exponencial), fontsize=8, ha='left',color='green')
+plt.scatter(data.dia, data.acumulados,color='black' )
+plt.plot(data.dia, funcion_1(data.dia),color='blue' )
+plt.plot(data.dia, funcion_2(data.dia),color='red' )
+plt.plot(data.dia, funcion_3(data.dia),color='green' )
+plt.legend(['puntos graficados','funcion lineal', 'funcion polinomica','funcion exponencial'])
 
-
-plt.scatter(data.dia, data.acumulados)
-plt.plot(data.dia, funcion_1(data.dia))
 plt.show()
-"""
+
